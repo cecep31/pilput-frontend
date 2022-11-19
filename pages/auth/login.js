@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Navigation from "../../components/header/Navigation";
+import localforage from "localforage"
 
 export default function Login() {
   const [username, setusername] = useState("");
@@ -22,13 +23,15 @@ export default function Login() {
       redirect: "follow",
     };
     var token = "";
-    fetch("http://localhost:8080/api/auth/login", requestOptions)
+    fetch("https://gobackend-api.onrender.com/api/auth/login", requestOptions)
       .then((response) => response.text())
       .then((result) => {
         let nejson = JSON.parse(result)
         token = nejson.data; 
         // console.log(token); 
-        window.localStorage.setItem("token", token)
+        // window.localStorage.setItem("token", token)
+        localforage.setItem("token",token)
+        alert(localforage.getItem("token"))
       })
       .catch((error) => console.log("error", error));
     // console.log(token);
