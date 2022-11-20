@@ -1,41 +1,63 @@
 import React from "react";
 import { useState } from "react";
-import Navigation from "../../components/header/Navigation";
-import localforage from "localforage"
+import Navigation from "../components/header/Navigation";
+import axios from "axios";
+import localforage from "localforage";
+import router from "next/router";
+import nookies from "nookies";
+
+export async function getServerSideProps(ctx) {
+  const cookies = nookies.get(ctx);
+  console.log(cookies.token);
+  if (cookies.token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
 
 export default function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
 
   async function handleLogin() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
+    var data = JSON.stringify({
       identity: username,
-      password: password,
+      password: username,
     });
 
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
+    var config = {
+      method: "post",
+      url: "https://api.pilput.my.id/api/auth/login",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
     };
-    var token = "";
-    fetch("https://gobackend-api.onrender.com/api/auth/login", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        let nejson = JSON.parse(result)
-        token = nejson.data; 
-        // console.log(token); 
-        // window.localStorage.setItem("token", token)
-        localforage.setItem("token",token)
-        alert(localforage.getItem("token"))
+
+    axios(config)
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.status == "success") {
+          let user = {
+            name: response.data.data.name,
+            role: response.data.data.role,
+            token: response.data.data.token,
+            islogin: true,
+          };
+          nookies.set(null, "token", response.data.data.token);
+          router.replace("/dashboard");
+        }
       })
-      .catch((error) => console.log("error", error));
-    // console.log(token);
-    
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
