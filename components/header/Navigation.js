@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { getContacts, isLoggedIn } from "../../lib/Auth";
 import nookies from 'nookies'
+import router from "next/router";
 
 export default function Navigation() {
   const [islogged, setislogged] = useState();
   
   function handleLogout() {
-    nookies.destroy(null,"token")
+    nookies.destroy(null,"token");
+    router.push("/login")
   }
  
   // console.log(JSON.parse(islogged));

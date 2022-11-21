@@ -8,7 +8,7 @@ import nookies from "nookies";
 
 export async function getServerSideProps(ctx) {
   const cookies = nookies.get(ctx);
-  console.log(cookies.token);
+  // console.log(cookies.token);
   if (cookies.token) {
     return {
       redirect: {
@@ -43,15 +43,8 @@ export default function Login() {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
         if (response.data.status == "success") {
-          let user = {
-            name: response.data.data.name,
-            role: response.data.data.role,
-            token: response.data.data.token,
-            islogin: true,
-          };
-          nookies.set(null, "token", response.data.data.token);
+          nookies.set(null, "token", response.data.data);
           router.replace("/dashboard");
         }
       })
