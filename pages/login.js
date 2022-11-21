@@ -12,7 +12,7 @@ export async function getServerSideProps(ctx) {
   if (cookies.token) {
     return {
       redirect: {
-        destination: '/',
+        destination: "/",
         permanent: false,
       },
     };
@@ -40,17 +40,18 @@ export default function Login() {
       },
       data: data,
     };
+    try {
+      const response = await axios(config);
+      if (response.status == 200) {
+        nookies.set(null, "token", response.data.data);
+        router.replace("/dashboard");
+      }
+    } catch (error) {
+      alert("Username or password is wrong")
+      // console.error(error);
+    }
 
-    axios(config)
-      .then(function (response) {
-        if (response.data.status == "success") {
-          nookies.set(null, "token", response.data.data);
-          router.replace("/dashboard");
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    
   }
 
   return (

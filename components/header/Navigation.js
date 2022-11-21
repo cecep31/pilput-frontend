@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Link from "next/link";
 import nookies, { parseCookies } from "nookies";
 import router from "next/router";
 
 export default function Navigation() {
-  const [islogged, setislogged] = useState(nookies.get(null, "token"));
+  const [islogged, setislogged] = useState();
+
+  useEffect(() => {
+    const cookies = parseCookies()
+    if (cookies.token) {
+      setislogged(true)
+    }else{
+      setislogged(false)
+    }
+    
+    
+  }, []);
   function handleLogout() {
     nookies.destroy(null, "token");
     router.push("/login");
