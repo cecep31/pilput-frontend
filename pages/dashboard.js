@@ -1,5 +1,6 @@
 import Link from "next/link";
 import nookies from "nookies";
+import Logged from "../components/layouts/Logged";
 
 export async function getServerSideProps(ctx) {
   const cookies = nookies.get(ctx);
@@ -19,11 +20,13 @@ export async function getServerSideProps(ctx) {
 
 export default function Dashboard() {
   return (
-    <div>
-      <Link className="text-blue-500" href="/">
-        Home
-      </Link>
-      <div>Dashboard</div>
-    </div>
+    <>
+      <Logged>
+        <Link className="text-blue-500" href="/">
+          Home
+        </Link>
+   
+      </Logged>
+    </>
   );
 }

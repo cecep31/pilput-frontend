@@ -13,8 +13,6 @@ export default function Navigation() {
     }else{
       setislogged(false)
     }
-    
-    
   }, []);
   function handleLogout() {
     nookies.destroy(null, "token");
