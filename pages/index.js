@@ -50,10 +50,7 @@ export default function Example() {
             </div>
           </div>
           <div className="block w-full mx-auto mt-6 md:mt-0 relative">
-            <img
-              src="/images/object/12.svg"
-              className="max-w-xs md:max-w-2xl m-auto"
-            />
+            
           </div>
         </div>
       </div>
