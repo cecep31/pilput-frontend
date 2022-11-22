@@ -1,7 +1,26 @@
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import React,{useEffect,useState} from "react";
+import nookies,{parseCookies} from 'nookies'
 
 export default function Logged({children}) {
+  const [auth, setauth] = useState(parseJwt(parseCookies(null,"token").token));
+  function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+}
+  // useEffect(() => {
+  //   console.log();
+  //   let data = parseJwt(parseCookies(null,"token").token)
+  //   setauth(data)
+  //   console.log(data);
+  //   console.log(auth);
+  // }, []);
   return (
     <main className="bg-gray-100 dark:bg-gray-800 rounded-2xl h-screen overflow-hidden relative">
       <div className="flex items-start justify-between">
@@ -56,9 +75,9 @@ export default function Logged({children}) {
             </div>
             <nav className="mt-6">
               <div>
-                <a
+                <Link
                   className="w-full font-thin uppercase text-blue-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start bg-gradient-to-r from-white to-blue-100 dark:from-gray-700 dark:to-gray-800 border-r-4 border-blue-500"
-                  href="#"
+                  href="/dashboard"
                 >
                   <span className="text-left">
                     <svg
@@ -72,7 +91,7 @@ export default function Logged({children}) {
                     </svg>
                   </span>
                   <span className="mx-4 text-sm font-normal">Dashboard</span>
-                </a>
+                </Link>
                 <a
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
                   href="#"
@@ -91,9 +110,9 @@ export default function Logged({children}) {
                   </span>
                   <span className="mx-4 text-sm font-normal">Projects</span>
                 </a>
-                <a
+                <Link
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-                  href="#"
+                  href="/mytask"
                 >
                   <span className="text-left">
                     <svg
@@ -108,7 +127,7 @@ export default function Logged({children}) {
                     </svg>
                   </span>
                   <span className="mx-4 text-sm font-normal">My tasks</span>
-                </a>
+                </Link>
                 <a
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
                   href="#"
@@ -222,10 +241,15 @@ export default function Logged({children}) {
                   </div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
+                <div className="mr-4">
+                  {auth.identity}
+                </div>
                   <a href="#" className="block relative">
-                    <img
+                    <Image
                       alt="profil"
-                      src="/images/person/1.jpg"
+                      width={50}
+                      height={50}
+                      src="https://placeimg.com/640/480/any"
                       className="mx-auto object-cover rounded-full h-10 w-10 "
                     />
                   </a>

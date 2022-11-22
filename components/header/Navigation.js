@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import nookies, { parseCookies } from "nookies";
 import router from "next/router";
@@ -7,11 +7,11 @@ export default function Navigation() {
   const [islogged, setislogged] = useState();
 
   useEffect(() => {
-    const cookies = parseCookies()
+    const cookies = parseCookies();
     if (cookies.token) {
-      setislogged(true)
-    }else{
-      setislogged(false)
+      setislogged(true);
+    } else {
+      setislogged(false);
     }
   }, []);
   function handleLogout() {
@@ -56,12 +56,12 @@ export default function Navigation() {
       </div>
       <div>
         {islogged ? (
-          <button
+          <Link
+            href="/dashboard"
             className="bg-gray-500 px-5 py-2 rounded-lg hover:bg-gray-600 text-white"
-            onClick={handleLogout}
           >
-            Logout{islogged}
-          </button>
+            Dashboard
+          </Link>
         ) : (
           <Link
             href="/login"
@@ -74,7 +74,6 @@ export default function Navigation() {
     </div>
   );
 }
-
 
 export async function getServerSideProps(ctx) {
   return {
