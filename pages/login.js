@@ -29,17 +29,17 @@ export default function Login() {
   async function handleLogin() {
     var data = JSON.stringify({
       identity: username,
-      password: username,
+      password: password,
     });
 
     var config = {
       method: "post",
-      url: "http://54.151.157.5/api/auth/login",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      url: "https://api.pilput.my.id/api/auth/login",
+
       data: data,
     };
+    console.log(username);
+    console.log(password);
     try {
       const response = await axios(config);
       if (response.status == 200) {
@@ -47,11 +47,9 @@ export default function Login() {
         router.replace("/dashboard");
       }
     } catch (error) {
-      console.error(error);
-      alert("Username or password is wrong")
+      console.log(error);
+      alert("Username or password is wrong");
     }
-
-    
   }
 
   return (
