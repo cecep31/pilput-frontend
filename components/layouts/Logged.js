@@ -1,19 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import React,{useEffect,useState} from "react";
-import nookies,{parseCookies} from 'nookies'
+import React, { useEffect, useState } from "react";
+import nookies, { parseCookies } from "nookies";
 
-export default function Logged({children}) {
-  const [auth, setauth] = useState(parseJwt(parseCookies(null,"token").token));
-  function parseJwt (token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-
-    return JSON.parse(jsonPayload);
-}
+export default function Logged({ children }) {
+  const [auth, setauth] = useState();
+  
   // useEffect(() => {
   //   console.log();
   //   let data = parseJwt(parseCookies(null,"token").token)
@@ -43,11 +35,11 @@ export default function Logged({children}) {
                     id="linearGradient-1"
                   >
                     <stop
-                      stop-color="#FF0057"
-                      stop-opacity="0.16"
+                      stopColor="#FF0057"
+                      stopOpacity="0.16"
                       offset="0%"
                     ></stop>
-                    <stop stop-color="#FF0057" offset="86.1354%"></stop>
+                    <stop stopColor="#FF0057" offset="86.1354%"></stop>
                   </linearGradient>
                 </defs>
                 <g>
@@ -214,9 +206,7 @@ export default function Logged({children}) {
                       <svg
                         fill="none"
                         className="relative w-5 h-5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -241,14 +231,13 @@ export default function Logged({children}) {
                   </div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                <div className="mr-4">
-                  {auth.identity}
-                </div>
+                 
                   <a href="#" className="block relative">
                     <Image
                       alt="profil"
                       width={50}
                       height={50}
+                      priority
                       src="https://placeimg.com/640/480/any"
                       className="mx-auto object-cover rounded-full h-10 w-10 "
                     />
@@ -258,7 +247,7 @@ export default function Logged({children}) {
             </div>
           </header>
           <div className="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
-           {children}
+            {children}
           </div>
         </div>
       </div>

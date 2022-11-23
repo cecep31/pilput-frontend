@@ -47,8 +47,8 @@ export default function Login() {
         router.replace("/dashboard");
       }
     } catch (error) {
+      console.error(error);
       alert("Username or password is wrong")
-      // console.error(error);
     }
 
     
