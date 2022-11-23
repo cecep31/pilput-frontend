@@ -34,18 +34,14 @@ export default function Navigation() {
           >
             Home
           </Link>
-
-          <Link href="#" className="py-2 px-6 flex hover:text-indigo-500">
-            Watch
+          <Link href="#about" className="py-2 px-6 flex hover:text-indigo-500">
+            about
           </Link>
-          <Link href="#" className="py-2 px-6 flex hover:text-indigo-500">
-            Product
-          </Link>
-          <Link href="#" className="py-2 px-6 flex hover:text-indigo-500">
-            Contact
-          </Link>
-          <Link href="#" className="py-2 px-6 flex hover:text-indigo-500">
-            Carrer
+          <Link
+            href="#product"
+            className="py-2 px-6 flex hover:text-indigo-500"
+          >
+            social
           </Link>
         </nav>
         <button className="lg:hidden flex flex-col ml-4">

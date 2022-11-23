@@ -1,5 +1,5 @@
 import React from "react";
-import Logged from "../components/layouts/Logged";
+import Logged from "../../components/layouts/Logged";
 
 function Mytask() {
   return (

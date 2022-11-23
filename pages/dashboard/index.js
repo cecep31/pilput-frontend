@@ -1,6 +1,6 @@
 import Link from "next/link";
 import nookies from "nookies";
-import Logged from "../components/layouts/Logged";
+import Logged from "../../components/layouts/Logged";
 
 export async function getServerSideProps(ctx) {
   const cookies = nookies.get(ctx);

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import nookies, { parseCookies } from "nookies";
+import nookies, { destroyCookie } from "nookies";
+import router from "next/router";
 
 export default function Logged({ children }) {
   const [auth, setauth] = useState();
-  
+
   // useEffect(() => {
   //   console.log();
   //   let data = parseJwt(parseCookies(null,"token").token)
@@ -13,6 +14,12 @@ export default function Logged({ children }) {
   //   console.log(data);
   //   console.log(auth);
   // }, []);
+
+  function logout() {
+    destroyCookie(null, 'token')
+    router.push("/")
+  }
+
   return (
     <main className="bg-gray-100 dark:bg-gray-800 rounded-2xl h-screen overflow-hidden relative">
       <div className="flex items-start justify-between">
@@ -104,7 +111,7 @@ export default function Logged({ children }) {
                 </a>
                 <Link
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-                  href="/mytask"
+                  href="dashboard/mytask" passHref={true} 
                 >
                   <span className="text-left">
                     <svg
@@ -120,9 +127,9 @@ export default function Logged({ children }) {
                   </span>
                   <span className="mx-4 text-sm font-normal">My tasks</span>
                 </Link>
-                <a
+                <Link
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-                  href="#"
+                  href="dashboard/books" passHref={true} 
                 >
                   <span className="text-left">
                     <svg
@@ -136,8 +143,8 @@ export default function Logged({ children }) {
                       <path d="M960 0l960 384v128h-128q0 26-20.5 45t-48.5 19h-1526q-28 0-48.5-19t-20.5-45h-128v-128zm-704 640h256v768h128v-768h256v768h128v-768h256v768h128v-768h256v768h59q28 0 48.5 19t20.5 45v64h-1664v-64q0-26 20.5-45t48.5-19h59v-768zm1595 960q28 0 48.5 19t20.5 45v128h-1920v-128q0-26 20.5-45t48.5-19h1782z"></path>
                     </svg>
                   </span>
-                  <span className="mx-4 text-sm font-normal">Calendar</span>
-                </a>
+                  <span className="mx-4 text-sm font-normal">Book</span>
+                </Link>
                 <a
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
                   href="#"
@@ -206,7 +213,6 @@ export default function Logged({ children }) {
                       <svg
                         fill="none"
                         className="relative w-5 h-5"
-                        
                         stroke="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -231,7 +237,6 @@ export default function Logged({ children }) {
                   </div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                 
                   <a href="#" className="block relative">
                     <Image
                       alt="profil"
@@ -239,9 +244,10 @@ export default function Logged({ children }) {
                       height={50}
                       priority
                       src="https://placeimg.com/640/480/any"
-                      className="mx-auto object-cover rounded-full h-10 w-10 "
+                      className="mx-auto object-cover rounded-full h-10 w-10"
                     />
                   </a>
+                  <button onClick={logout}>Logout</button>
                 </div>
               </div>
             </div>

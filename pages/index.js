@@ -26,7 +26,7 @@ export default function Example() {
         <div className="container mx-auto px-6 flex flex-col justify-between items-center relative py-8">
           <div className="flex flex-col">
             <h1 className="font-light w-full uppercase text-center text-4xl sm:text-5xl dark:text-white text-gray-800">
-              The React Framework for Production
+              Built with Reactjs and Nexjs
             </h1>
             <h2 className="font-light max-w-2xl mx-auto w-full text-xl dark:text-white text-gray-500 text-center py-8">
               Next.js gives you the best developer experience with all the
