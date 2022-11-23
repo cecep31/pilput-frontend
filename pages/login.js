@@ -34,8 +34,10 @@ export default function Login() {
 
     var config = {
       method: "post",
-      url: "https://api.pilput.my.id/api/auth/login",
-
+      url: "https://api.pilput.my.id/auth/login",
+      headers: { 
+        'Content-Type': 'application/json'
+      },
       data: data,
     };
     console.log(username);
