@@ -2,28 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import nookies, { destroyCookie } from "nookies";
-import router,{useRouter} from "next/router";
+import router, { useRouter } from "next/router";
 
 export default function Logged({ children }) {
-  const [auth, setauth] = useState();
-
   const activerouter = useRouter();
 
-  // useEffect(() => {
-  //   console.log();
-  //   let data = parseJwt(parseCookies(null,"token").token)
-  //   setauth(data)
-  //   console.log(data);
-  //   console.log(auth);
-  // }, []);
-
+  
   function logout() {
     destroyCookie(null, "token");
     router.push("/");
   }
 
   return (
-    <main className="bg-gray-100 dark:bg-gray-800 rounded-2xl h-screen overflow-hidden relative">
+    <main className="bg-gray-100 dark:bg-gray-800 h-screen overflow-hidden relative">
       <div className="flex items-start justify-between">
         <div className="h-screen hidden lg:block my-4 ml-4 shadow-lg relative w-80">
           <div className="bg-white h-full rounded-2xl dark:bg-gray-700">
@@ -77,7 +68,11 @@ export default function Logged({ children }) {
             <nav className="mt-6">
               <div>
                 <Link
-                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
+                  className={`w-full font-thin uppercase ${
+                    activerouter.pathname == "/dashboard"
+                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      : "text-gray-500"
+                  }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard"
                 >
                   <span className="text-left">
@@ -112,7 +107,11 @@ export default function Logged({ children }) {
                   <span className="mx-4 text-sm font-normal">Projects</span>
                 </Link> */}
                 <Link
-                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard/mytask" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
+                  className={`w-full font-thin uppercase ${
+                    activerouter.pathname == "/dashboard/mytask"
+                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      : "text-gray-500"
+                  }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard/mytask"
                 >
                   <span className="text-left">
@@ -130,7 +129,11 @@ export default function Logged({ children }) {
                   <span className="mx-4 text-sm font-normal">My tasks</span>
                 </Link>
                 <Link
-                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard/books" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
+                  className={`w-full font-thin uppercase ${
+                    activerouter.pathname == "/dashboard/books"
+                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      : "text-gray-500"
+                  }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard/books"
                 >
                   <span className="text-left">
@@ -148,7 +151,11 @@ export default function Logged({ children }) {
                   <span className="mx-4 text-sm font-normal">Book</span>
                 </Link>
                 <Link
-                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard/manage-user" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
+                  className={`w-full font-thin uppercase ${
+                    activerouter.pathname == "/dashboard/manage-user"
+                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      : "text-gray-500"
+                  }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard/manage-user"
                 >
                   <span className="text-left">
@@ -164,7 +171,11 @@ export default function Logged({ children }) {
                   <span className="mx-4 text-sm font-normal">Manage user</span>
                 </Link>
                 <a
-                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard/report" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
+                  className={`w-full font-thin uppercase ${
+                    activerouter.pathname == "/dashboard/report"
+                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      : "text-gray-500"
+                  }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="#"
                 >
                   <span className="text-left">
@@ -204,7 +215,7 @@ export default function Logged({ children }) {
           </div>
         </div>
         <div className="flex flex-col w-full pl-0 md:p-4 md:space-y-4">
-          <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 rounded-2xl z-40">
+          <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 rounded-2xl z-20">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
               <div className="relative items-center pl-1 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
                 <div className="container relative left-0 z-50 flex w-3/4 h-full">

@@ -2,7 +2,8 @@ import React, { useState, useEffect, use } from "react";
 import nookies from "nookies";
 import Logged from "../../components/layouts/Logged";
 import Image from "next/image";
-import axios from "axios";
+import axios, { Axios } from "axios";
+import Modal from "../../components/user/Modal";
 
 export async function getServerSideProps(ctx) {
   const cookies = nookies.get(ctx);
@@ -18,7 +19,7 @@ export async function getServerSideProps(ctx) {
 
   var config = {
     method: "get",
-    url: "http://127.0.0.1:8080/api/v1/users",
+    url: "https://api.pilput.my.id/api/v1/users",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -34,16 +35,86 @@ export async function getServerSideProps(ctx) {
 
 function ManageUser({ usersprops }) {
   const [users, setusers] = useState(usersprops);
+  const [username, setusername] = useState();
+  const [email, setemail] = useState();
+  const [role, setrole] = useState();
+  const [password, setpassword] = useState();
+  const [repassword, setrepassword] = useState();
+  const [modaluser, setmodaluser] = useState(false);
+  const [token, settoken] = useState(nookies.get(null,"token").token);
 
-  function addUser() {
-    console.log(users);
+  function getUsers(){
+    var config = {
+        method: 'get',
+        url: 'http://127.0.0.1:8080/api/v1/users',
+        headers: { 
+          'Content-Type': 'application/json', 
+          'Authorization': `Bearer ${token}`
+        }
+      };
+      
+      axios(config)
+      .then(function (response) {
+        setusers(response.data)
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+     
+  }
+  useEffect(() => {
+    getUsers()
+  }, []);
+  
+  
+
+  function deleteUser(id) {
+    console.log(id)
+  }
+
+  function showModaluser() {
+    setmodaluser(true);
+  }
+
+  function closeModaluser() {
+    setmodaluser(false);
+  }
+
+  async function submitHandler(e) {
+    e.preventDefault();
+    if (password != repassword) {
+      return;
+    }
+    let token = nookies.get(null, "token");
+    token = token.token;
+    var data = JSON.stringify({
+      username: username,
+      email: email,
+      password: password,
+      role: role,
+      image: "asddasdas",
+    });
+
+    var config = {
+      method: "post",
+      url: "https://api.pilput.my.id/api/v1/users",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
+    };
+    var usersprops = await axios(config);
+    usersprops = usersprops.data;
+    setmodaluser(false);
   }
 
   return (
     <Logged>
       <div className="bg-white p-5 rounded-xl shadow-lg">
         <h1>Manage user</h1>
-        <div onClick={addUser}>Add user</div>
+        <button onClick={showModaluser}>Add user</button>
       </div>
       <div className="w-full  mx-auto bg-white shadow-lg border border-gray-200 mt-3 rounded-xl">
         <header className="px-5 py-4 border-b border-gray-100">
@@ -63,7 +134,7 @@ function ManageUser({ usersprops }) {
                   <th className="p-2 whitespace-nowrap">
                     <div className="font-semibold text-left">Role</div>
                   </th>
-                 
+
                   <th className="p-2 whitespace-nowrap">
                     <div className="font-semibold text-center">Action</div>
                   </th>
@@ -95,20 +166,120 @@ function ManageUser({ usersprops }) {
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left">{user.role}</div>
                       </td>
-                    
+
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-lg text-center">??</div>
+                        <div className="text-lg text-center"><button onClick={deleteUser}>Delete</button></div>
                       </td>
                     </tr>
                   );
                 })}
-
-               
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      {modaluser && (
+        <Modal>
+          <form onSubmit={submitHandler}>
+            <div className="mb-5">
+              <label className="mb-3 block text-base font-medium text-[#07074D]">
+                User Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value={username}
+                onChange={(e) => {
+                  setusername(e.target.value);
+                }}
+                placeholder="User Name"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
+            <div className="mb-5">
+              <label className="mb-3 block text-base font-medium text-[#07074D]">
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                onChange={(e) => {
+                  setemail(e.target.value);
+                }}
+                required
+                placeholder="example@domain.com"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
+            <div className="mb-5">
+              <label className="mb-3 block text-base font-medium text-[#07074D]">
+                Email Address
+              </label>
+
+              <select
+                id="country"
+                name="country"
+                onChange={(e) => {
+                  setrole(e.target.value);
+                }}
+                autocomplete="country-name"
+                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-3 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value="admin">Admin</option>
+                <option>user</option>
+                <option>nothing</option>
+              </select>
+            </div>
+            <div className="mb-5">
+              <label className="mb-3 block text-base font-medium text-[#07074D]">
+                Password
+              </label>
+              <input
+                type="password"
+                name="subject"
+                id="subject"
+                onChange={(e) => {
+                  setpassword(e.target.value);
+                }}
+                placeholder="Password"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
+            <div className="mb-5">
+              <label className="mb-3 block text-base font-medium text-[#07074D]">
+                Retype Password
+              </label>
+              <input
+                required
+                type="password"
+                name="subject"
+                id="subject"
+                onChange={(e) => {
+                  setrepassword(e.target.value);
+                }}
+                placeholder="Retype Password"
+                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+              />
+            </div>
+
+            <div>
+              <button
+                type="Submit"
+                className="hover:shadow-form rounded-md bg-[#6A64F1] py-2 px-8 text-base font-semibold text-white outline-none"
+              >
+                Submit
+              </button>
+              <button
+                onClick={closeModaluser}
+                className="hover:shadow-form ml-2 rounded-md bg-gray-500 py-2 px-8 text-base font-semibold text-white outline-none"
+              >
+                Close
+              </button>
+            </div>
+          </form>
+        </Modal>
+      )}
     </Logged>
   );
 }
