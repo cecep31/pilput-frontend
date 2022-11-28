@@ -20,7 +20,11 @@ export async function getServerSideProps(ctx) {
 function Mytask() {
   return (
   <Logged>
-    Mytask
+    <div className="bg-white p-5 rounded-xl shadow-lg">
+        <h1>My Tasks</h1> 
+        <div>Add Task</div>
+        <div></div>
+      </div>
   </Logged>
   );
 }

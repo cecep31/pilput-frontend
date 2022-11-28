@@ -2,10 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import nookies, { destroyCookie } from "nookies";
-import router from "next/router";
+import router,{useRouter} from "next/router";
 
 export default function Logged({ children }) {
   const [auth, setauth] = useState();
+
+  const activerouter = useRouter();
 
   // useEffect(() => {
   //   console.log();
@@ -16,8 +18,8 @@ export default function Logged({ children }) {
   // }, []);
 
   function logout() {
-    destroyCookie(null, 'token')
-    router.push("/")
+    destroyCookie(null, "token");
+    router.push("/");
   }
 
   return (
@@ -75,7 +77,7 @@ export default function Logged({ children }) {
             <nav className="mt-6">
               <div>
                 <Link
-                  className="w-full font-thin uppercase text-blue-500 flex items-center p-4 my-2 transition-colors duration-200 justify-start bg-gradient-to-r from-white to-blue-100 dark:from-gray-700 dark:to-gray-800 border-r-4 border-blue-500"
+                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard"
                 >
                   <span className="text-left">
@@ -91,8 +93,8 @@ export default function Logged({ children }) {
                   </span>
                   <span className="mx-4 text-sm font-normal">Dashboard</span>
                 </Link>
-                <a
-                  className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
+                {/* <Link
+                  className={`w-full font-thin uppercase ${router.pathname == "/dashboard/project" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="#"
                 >
                   <span className="text-left">
@@ -108,9 +110,9 @@ export default function Logged({ children }) {
                     </svg>
                   </span>
                   <span className="mx-4 text-sm font-normal">Projects</span>
-                </a>
+                </Link> */}
                 <Link
-                  className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
+                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard/mytask" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard/mytask"
                 >
                   <span className="text-left">
@@ -128,7 +130,7 @@ export default function Logged({ children }) {
                   <span className="mx-4 text-sm font-normal">My tasks</span>
                 </Link>
                 <Link
-                  className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
+                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard/books" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard/books"
                 >
                   <span className="text-left">
@@ -146,25 +148,23 @@ export default function Logged({ children }) {
                   <span className="mx-4 text-sm font-normal">Book</span>
                 </Link>
                 <Link
-                  className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-                  href="/manage-user"
+                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard/manage-user" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
+                  href="/dashboard/manage-user"
                 >
                   <span className="text-left">
                     <svg
-                      width="20"
-                      height="20"
-                      className="m-auto"
-                      fill="currentColor"
-                      viewBox="0 0 2048 1792"
                       xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-6 h-6"
                     >
-                      <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z"></path>
+                      <path d="M4.5 6.375a4.125 4.125 0 118.25 0 4.125 4.125 0 01-8.25 0zM14.25 8.625a3.375 3.375 0 116.75 0 3.375 3.375 0 01-6.75 0zM1.5 19.125a7.125 7.125 0 0114.25 0v.003l-.001.119a.75.75 0 01-.363.63 13.067 13.067 0 01-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 01-.364-.63l-.001-.122zM17.25 19.128l-.001.144a2.25 2.25 0 01-.233.96 10.088 10.088 0 005.06-1.01.75.75 0 00.42-.643 4.875 4.875 0 00-6.957-4.611 8.586 8.586 0 011.71 5.157v.003z" />
                     </svg>
                   </span>
                   <span className="mx-4 text-sm font-normal">Manage user</span>
                 </Link>
                 <a
-                  className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
+                  className={`w-full font-thin uppercase ${activerouter.pathname == "/dashboard/report" ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100" : "text-gray-500"}  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="#"
                 >
                   <span className="text-left">
@@ -252,7 +252,7 @@ export default function Logged({ children }) {
               </div>
             </div>
           </header>
-          <div className="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0">
+          <div className="overflow-auto h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0 text-gray-600">
             {children}
           </div>
         </div>

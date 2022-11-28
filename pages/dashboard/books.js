@@ -1,5 +1,5 @@
-import React from 'react'
-import Logged from '../../components/layouts/Logged'
+import React from "react";
+import Logged from "../../components/layouts/Logged";
 import nookies from "nookies";
 
 export async function getServerSideProps(ctx) {
@@ -19,8 +19,14 @@ export async function getServerSideProps(ctx) {
 }
 const Books = () => {
   return (
-    <Logged>Books</Logged>
-  )
-}
+    <Logged>
+      <div className="bg-white p-5 rounded-xl shadow-lg">
+        <h1>Books</h1>
+        <div>Add Books</div>
+        <div></div>
+      </div>
+    </Logged>
+  );
+};
 
-export default Books
+export default Books;
