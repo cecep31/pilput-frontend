@@ -4,24 +4,6 @@ import Logged from "../../components/layouts/Logged";
 import Image from "next/image";
 import axios from "axios";
 
-async function getUser() {
-  let token = nookies.get(ct).token;
-  
-  var config = {
-    method: "get",
-    url: "https://api.pilput.my.id/api/v1/users",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  try {
-    const response = await axios(config);
-    setusers(response.data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 export async function getServerSideProps(ctx) {
   const cookies = nookies.get(ctx);
   if (!cookies.token) {
