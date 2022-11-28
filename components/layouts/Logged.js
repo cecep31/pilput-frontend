@@ -111,7 +111,7 @@ export default function Logged({ children }) {
                 </a>
                 <Link
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-                  href="dashboard/mytask" passHref={true} 
+                  href="/dashboard/mytask"
                 >
                   <span className="text-left">
                     <svg
@@ -129,7 +129,7 @@ export default function Logged({ children }) {
                 </Link>
                 <Link
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-                  href="dashboard/books" passHref={true} 
+                  href="/dashboard/books"
                 >
                   <span className="text-left">
                     <svg
