@@ -145,9 +145,9 @@ export default function Logged({ children }) {
                   </span>
                   <span className="mx-4 text-sm font-normal">Book</span>
                 </Link>
-                <a
+                <Link
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
-                  href="#"
+                  href="/manage-user"
                 >
                   <span className="text-left">
                     <svg
@@ -161,8 +161,8 @@ export default function Logged({ children }) {
                       <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z"></path>
                     </svg>
                   </span>
-                  <span className="mx-4 text-sm font-normal">Time manage</span>
-                </a>
+                  <span className="mx-4 text-sm font-normal">Manage user</span>
+                </Link>
                 <a
                   className="w-full font-thin uppercase text-gray-500 dark:text-gray-200 flex items-center p-4 my-2 transition-colors duration-200 justify-start hover:text-blue-500"
                   href="#"
