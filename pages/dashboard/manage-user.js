@@ -41,36 +41,45 @@ function ManageUser({ usersprops }) {
   const [password, setpassword] = useState();
   const [repassword, setrepassword] = useState();
   const [modaluser, setmodaluser] = useState(false);
-  const [token, settoken] = useState(nookies.get(null,"token").token);
+  const [token, settoken] = useState(nookies.get(null, "token").token);
 
-  function getUsers(){
+  function getUsers() {
     var config = {
-        method: 'get',
-        url: 'http://127.0.0.1:8080/api/v1/users',
-        headers: { 
-          'Content-Type': 'application/json', 
-          'Authorization': `Bearer ${token}`
-        }
-      };
-      
-      axios(config)
+      method: "get",
+      url: "https://api.pilput.my.id/api/v1/users",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios(config)
       .then(function (response) {
-        setusers(response.data)
+        setusers(response.data);
         console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
-     
   }
-  useEffect(() => {
-    getUsers()
-  }, []);
-  
-  
 
   function deleteUser(id) {
-    console.log(id)
+    var config = {
+      method: "delete",
+      url: `https://api.pilput.my.id/api/v1/users/${id}`,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        getUsers();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   function showModaluser() {
@@ -108,6 +117,7 @@ function ManageUser({ usersprops }) {
     var usersprops = await axios(config);
     usersprops = usersprops.data;
     setmodaluser(false);
+    getUsers();
   }
 
   return (
@@ -168,7 +178,15 @@ function ManageUser({ usersprops }) {
                       </td>
 
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-lg text-center"><button onClick={deleteUser}>Delete</button></div>
+                        <div id={user.id} className="text-lg text-center">
+                          <button
+                            onClick={() => {
+                              deleteUser(user.id);
+                            }}
+                          >
+                            Delete
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -187,8 +205,6 @@ function ManageUser({ usersprops }) {
               </label>
               <input
                 type="text"
-                name="name"
-                id="name"
                 value={username}
                 onChange={(e) => {
                   setusername(e.target.value);
@@ -203,7 +219,6 @@ function ManageUser({ usersprops }) {
               </label>
               <input
                 type="email"
-                id="email"
                 onChange={(e) => {
                   setemail(e.target.value);
                 }}
@@ -218,12 +233,9 @@ function ManageUser({ usersprops }) {
               </label>
 
               <select
-                id="country"
-                name="country"
                 onChange={(e) => {
                   setrole(e.target.value);
                 }}
-                autocomplete="country-name"
                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-3 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               >
                 <option value="admin">Admin</option>
@@ -237,8 +249,6 @@ function ManageUser({ usersprops }) {
               </label>
               <input
                 type="password"
-                name="subject"
-                id="subject"
                 onChange={(e) => {
                   setpassword(e.target.value);
                 }}
@@ -253,8 +263,6 @@ function ManageUser({ usersprops }) {
               <input
                 required
                 type="password"
-                name="subject"
-                id="subject"
                 onChange={(e) => {
                   setrepassword(e.target.value);
                 }}
@@ -270,7 +278,7 @@ function ManageUser({ usersprops }) {
               >
                 Submit
               </button>
-              <button
+              <button type="button"
                 onClick={closeModaluser}
                 className="hover:shadow-form ml-2 rounded-md bg-gray-500 py-2 px-8 text-base font-semibold text-white outline-none"
               >
