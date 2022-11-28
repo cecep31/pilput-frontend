@@ -124,11 +124,16 @@ function ManageUser({ usersprops }) {
     <Logged>
       <div className="bg-white p-5 rounded-xl shadow-lg">
         <h1>Manage user</h1>
-        <button onClick={showModaluser}>Add user</button>
       </div>
       <div className="w-full  mx-auto bg-white shadow-lg border border-gray-200 mt-3 rounded-xl">
         <header className="px-5 py-4 border-b border-gray-100">
-          <h2 className="font-semibold text-gray-800">Users</h2>
+          <span className="font-semibold text-gray-800">Users</span>
+          <button
+            className="ml-3 bg-green-600 text-white py-2 px-4 rounded-xl hover:bg-green-700"
+            onClick={showModaluser}
+          >
+            Add user
+          </button>
         </header>
         <div className="p-3">
           <div className="overflow-x-auto">
@@ -238,9 +243,10 @@ function ManageUser({ usersprops }) {
                 }}
                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-3 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               >
+                <option>Select role</option>
                 <option value="admin">Admin</option>
-                <option>user</option>
-                <option>nothing</option>
+                <option value="member">user</option>
+                <option value="super_admin">pilput</option>
               </select>
             </div>
             <div className="mb-5">
@@ -278,7 +284,8 @@ function ManageUser({ usersprops }) {
               >
                 Submit
               </button>
-              <button type="button"
+              <button
+                type="button"
                 onClick={closeModaluser}
                 className="hover:shadow-form ml-2 rounded-md bg-gray-500 py-2 px-8 text-base font-semibold text-white outline-none"
               >
