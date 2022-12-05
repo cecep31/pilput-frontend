@@ -3,7 +3,7 @@ import { useState } from "react";
 import Navigation from "../components/header/Navigation";
 import axios from "axios";
 import localforage from "localforage";
-import router from "next/router";
+import router, { useRouter } from "next/router";
 import nookies from "nookies";
 
 export async function getServerSideProps(ctx) {
@@ -25,6 +25,7 @@ export async function getServerSideProps(ctx) {
 export default function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
+  const router = useRouter();
 
   async function handleLogin() {
     var data = JSON.stringify({
@@ -47,6 +48,7 @@ export default function Login() {
       if (response.status == 200) {
         nookies.set(null, "token", response.data.data);
         router.replace("/dashboard");
+        router.pu
       }
     } catch (error) {
       console.log(error);
@@ -56,10 +58,6 @@ export default function Login() {
 
   return (
     <main className="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
-      {/* <header className="h-24 sm:h-32 flex items-center z-30 w-full">
-        <Navigation />
-      </header> */}
-
       <div className="min-h-screen flex justify-center items-center">
         <div className="absolute w-60 h-60 rounded-xl bg-black -top-5 -left-16 z-0 transform rotate-45 hidden md:block"></div>
         <div className="absolute w-48 h-48 rounded-xl bg-black -bottom-6 -right-10 transform rotate-12 hidden md:block"></div>
