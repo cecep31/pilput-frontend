@@ -33,7 +33,7 @@ export async function getServerSideProps(ctx) {
 }
 function Mytask({ taskgroups }) {
   const [groups, setgroups] = useState(taskgroups);
-  console.log(groups);
+  // console.log(groups);
   return (
     <Logged>
       <div className="bg-white p-5 rounded-xl shadow-lg">
