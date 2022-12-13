@@ -3,12 +3,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import nookies, { destroyCookie } from "nookies";
 import router, { useRouter } from "next/router";
+import {deleteCookie} from 'cookies-next'
 
 export default function Logged({ children }) {
   const activerouter = useRouter();
 
   function logout() {
-    destroyCookie(null, "token");
+    deleteCookie("token")
     router.push("/");
   }
 
