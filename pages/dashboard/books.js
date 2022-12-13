@@ -1,11 +1,12 @@
 import React from "react";
 import Logged from "../../components/layouts/Logged";
 import nookies from "nookies";
+import {getCookie} from 'cookies-next'
 
 export async function getServerSideProps(ctx) {
-  const cookies = nookies.get(ctx);
+  const token = getCookie("token");
   // console.log(cookies.token);
-  if (!cookies.token) {
+  if (token) {
     return {
       redirect: {
         destination: "/login",

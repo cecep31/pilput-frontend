@@ -1,13 +1,14 @@
 import React, { useState, useEffect, use } from "react";
 import nookies from "nookies";
+import { getCookie } from "cookies-next";
 import Logged from "../../components/layouts/Logged";
 import Image from "next/image";
 import axios, { Axios } from "axios";
 import Modal from "../../components/user/Modal";
 
 export async function getServerSideProps(ctx) {
-  const cookies = nookies.get(ctx);
-  if (!cookies.token) {
+  const token = getCookie("token");
+  if (token) {
     return {
       redirect: {
         destination: "/login",
@@ -15,33 +16,25 @@ export async function getServerSideProps(ctx) {
       },
     };
   }
-  let token = cookies.token;
 
-  var config = {
-    method: "get",
-    url: "https://api.pilput.my.id/api/v1/users",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    },
-  };
-
-  var usersprops = await axios(config);
-  usersprops = usersprops.data;
   return {
-    props: { usersprops }, // will be passed to the page component as props
+    props: {}, // will be passed to the page component as props
   };
 }
 
-function ManageUser({ usersprops }) {
-  const [users, setusers] = useState(usersprops);
+function ManageUser() {
+  const [users, setusers] = useState([]);
   const [username, setusername] = useState();
   const [email, setemail] = useState();
   const [role, setrole] = useState();
   const [password, setpassword] = useState();
   const [repassword, setrepassword] = useState();
   const [modaluser, setmodaluser] = useState(false);
-  const [token, settoken] = useState(nookies.get(null, "token").token);
+  const [token, settoken] = useState(getCookie("token"));
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   function getUsers() {
     var config = {
@@ -56,7 +49,6 @@ function ManageUser({ usersprops }) {
     axios(config)
       .then(function (response) {
         setusers(response.data);
-        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -95,8 +87,7 @@ function ManageUser({ usersprops }) {
     if (password != repassword) {
       return;
     }
-    let token = nookies.get(null, "token");
-    token = token.token;
+
     var data = JSON.stringify({
       username: username,
       email: email,
