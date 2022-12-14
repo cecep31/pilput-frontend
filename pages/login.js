@@ -99,7 +99,7 @@ export default function Login() {
             {loginwait ? (
               <button
                 type="button"
-                className="py-3 w-48 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                className="py-3 w-48 flex justify-center items-center  bg-gray-800 hover:bg-gray-900 focus:ring-gray-500 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-2xl "
               >
                 <svg
                   width="20"
