@@ -71,7 +71,7 @@ export default function Login() {
               Sign in
             </h1>
             <p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
-              lanjut aja login ngapain baca
+              Lanjut aja login, ngapain baca
             </p>
           </div>
           <div className="space-y-4">
@@ -98,7 +98,7 @@ export default function Login() {
             {loginwait ? (
               <button
                 type="button"
-                className="py-3 w-64 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
+                className="py-3 w-48 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
               >
                 <svg
                   width="20"
@@ -115,7 +115,7 @@ export default function Login() {
             ) : (
               <button
                 onClick={handleLogin}
-                className="py-3 w-64 text-xl text-white bg-gray-800 hover:bg-gray-900 rounded-2xl"
+                className="py-3 w-48 text-xl text-white bg-gray-800 hover:bg-gray-900 rounded-2xl"
               >
                 Login
               </button>
