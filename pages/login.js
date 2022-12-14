@@ -4,6 +4,7 @@ import Navigation from "../components/header/Navigation";
 import axios from "axios";
 import localforage from "localforage";
 import router, { useRouter } from "next/router";
+import {setCookie} from 'cookies-next'
 import nookies from "nookies";
 
 export async function getServerSideProps(ctx) {
@@ -50,7 +51,8 @@ export default function Login() {
     try {
       const response = await axios(config);
       if (response.status == 200) {
-        nookies.set(null, "token", response.data.data);
+        // nookies.set(null, "token", response.data.data);
+        setCookie("token",response.data.data);
         router.replace("/dashboard");
         setloginwait(false);
       }

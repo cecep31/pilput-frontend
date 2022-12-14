@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Navigation from "../components/header/Navigation";
 import Link from "next/link";
+import { getCookie } from "cookies-next";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -13,7 +14,14 @@ const navigation = [
 ];
 
 export default function Example() {
+  // const [islogged, setislogged] = useState(false);
+  const [token, settoken] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+
+  useEffect(() => {
+    settoken(getCookie("token"))
+  }, []);
 
   return (
     <div className="isolate bg-white">
@@ -26,7 +34,7 @@ export default function Example() {
         >
           <path
             fill="url(#45de2b6b-92d5-4d68-a6a0-9b9b2abad533)"
-            fill-opacity=".3"
+            fillOpacity=".3"
             d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
           />
           <defs>
@@ -38,8 +46,8 @@ export default function Example() {
               y2="474.645"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stop-color="#9089FC"></stop>
-              <stop offset="1" stop-color="#FF80B5"></stop>
+              <stop stopColor="#9089FC"></stop>
+              <stop offset="1" stopColor="#FF80B5"></stop>
             </linearGradient>
           </defs>
         </svg>
@@ -51,15 +59,9 @@ export default function Example() {
             aria-label="Global"
           >
             <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-              <Link href="#" className="-m-1.5 p-1.5">
+              <Link href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">Your Company</span>
-                <Image
-                  className="h-8"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
-                  width="40"
-                  height={40}
-                />
+                PILPUT
               </Link>
             </div>
             <div className="flex lg:hidden">
@@ -74,13 +76,13 @@ export default function Example() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   aria-hidden="true"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                   />
                 </svg>
@@ -116,12 +118,21 @@ export default function Example() {
               </a>
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-              <Link
-                href="/login"
-                className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-              >
-                Log in
-              </Link>
+              {token ? (
+                <Link
+                  href="/dashboard"
+                  className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 bg-green-500 text-gray-100 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  href="/login"
+                  className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                >
+                  Log in
+                </Link>
+              )}
             </div>
           </nav>
 
@@ -155,13 +166,13 @@ export default function Example() {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
                       aria-hidden="true"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M6 18L18 6M6 6l12 12"
                       />
                     </svg>
@@ -270,7 +281,7 @@ export default function Example() {
                 >
                   <path
                     fill="url(#ecb5b0c9-546c-4772-8c71-4d3f06d544bc)"
-                    fill-opacity=".3"
+                    fillOpacity=".3"
                     d="M317.219 518.975L203.852 678 0 438.341l317.219 80.634 204.172-286.402c1.307 132.337 45.083 346.658 209.733 145.248C936.936 126.058 882.053-94.234 1031.02 41.331c119.18 108.451 130.68 295.337 121.53 375.223L855 299l21.173 362.054-558.954-142.079z"
                   />
                   <defs>
@@ -282,8 +293,8 @@ export default function Example() {
                       y2="474.645"
                       gradientUnits="userSpaceOnUse"
                     >
-                      <stop stop-color="#9089FC"></stop>
-                      <stop offset="1" stop-color="#FF80B5"></stop>
+                      <stop stopColor="#9089FC"></stop>
+                      <stop offset="1" stopColor="#FF80B5"></stop>
                     </linearGradient>
                   </defs>
                 </svg>
