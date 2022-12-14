@@ -25,11 +25,11 @@ export async function getServerSideProps(ctx) {
 export default function Login() {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
-  const [loginwait, setloginwait] = useState(0);
+  const [loginwait, setloginwait] = useState(false);
   const router = useRouter();
 
   async function handleLogin() {
-    setloginwait(1);
+    setloginwait(true);
     // console.log(username);
     // console.log("loginwait");
     // console.log(password);
@@ -52,11 +52,12 @@ export default function Login() {
       if (response.status == 200) {
         nookies.set(null, "token", response.data.data);
         router.replace("/dashboard");
-        router.pu;
+        setloginwait(false);
       }
     } catch (error) {
       console.log(error);
       alert("Username or password is wrong");
+      setloginwait(false);
     }
   }
 
