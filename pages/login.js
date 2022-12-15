@@ -4,7 +4,7 @@ import Navigation from "../components/header/Navigation";
 import axios from "axios";
 import localforage from "localforage";
 import router, { useRouter } from "next/router";
-import {setCookie} from 'cookies-next'
+import { setCookie } from "cookies-next";
 import nookies from "nookies";
 
 export async function getServerSideProps(ctx) {
@@ -29,7 +29,9 @@ export default function Login() {
   const [loginwait, setloginwait] = useState(false);
   const router = useRouter();
 
-  async function handleLogin() {
+  async function handleLogin(e) {
+    e.preventDefault();
+    console.log("hahah");
     setloginwait(true);
     // console.log(username);
     // console.log("loginwait");
@@ -52,7 +54,7 @@ export default function Login() {
       const response = await axios(config);
       if (response.status == 200) {
         // nookies.set(null, "token", response.data.data);
-        setCookie("token",response.data.data);
+        setCookie("token", response.data.data);
         router.replace("/dashboard");
         setloginwait(false);
       }
@@ -77,57 +79,56 @@ export default function Login() {
               Lanjut aja login, ngapain baca
             </p>
           </div>
-          <div className="space-y-4">
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => {
-                setusername(e.target.value);
-              }}
-              className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => {
-                setpassword(e.target.value);
-              }}
-              className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
-            />
-          </div>
-          <div className="flex justify-center mt-6">
-            {loginwait ? (
-              <button
-                type="button"
-                className="py-3 w-48 flex justify-center items-center  bg-gray-800 hover:bg-gray-900 focus:ring-gray-500 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-2xl "
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="mr-2 animate-spin"
-                  viewBox="0 0 1792 1792"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z"></path>
-                </svg>
-                loading...
-              </button>
-            ) : (
-              <button
-                onClick={handleLogin}
-                className="py-3 w-48 text-xl text-white bg-gray-800 hover:bg-gray-900 rounded-2xl"
-              >
-                Login
-              </button>
-            )}
-
-            {/* <p className="mt-4 text-sm">
-              Already Have An Account?{" "}
-              <span className="underline cursor-pointer"> Sign In</span>
-            </p> */}
+          <div>
+            <form onSubmit={handleLogin} className="space-y-4">
+              <input
+                type="text"
+                placeholder="Username"
+                required
+                value={username}
+                onChange={(e) => {
+                  setusername(e.target.value);
+                }}
+                className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                required
+                onChange={(e) => {
+                  setpassword(e.target.value);
+                }}
+                className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
+              />
+              <div className="flex justify-center mt-6">
+                {loginwait ? (
+                  <button
+                    type="button"
+                    className="btn btn-wide flex justify-center items-center  bg-gray-800 hover:bg-gray-900 focus:ring-gray-500 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-2xl "
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      className="mr-2 animate-spin"
+                      viewBox="0 0 1792 1792"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M526 1394q0 53-37.5 90.5t-90.5 37.5q-52 0-90-38t-38-90q0-53 37.5-90.5t90.5-37.5 90.5 37.5 37.5 90.5zm498 206q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-704-704q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm1202 498q0 52-38 90t-90 38q-53 0-90.5-37.5t-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-964-996q0 66-47 113t-113 47-113-47-47-113 47-113 113-47 113 47 47 113zm1170 498q0 53-37.5 90.5t-90.5 37.5-90.5-37.5-37.5-90.5 37.5-90.5 90.5-37.5 90.5 37.5 37.5 90.5zm-640-704q0 80-56 136t-136 56-136-56-56-136 56-136 136-56 136 56 56 136zm530 206q0 93-66 158.5t-158 65.5q-93 0-158.5-65.5t-65.5-158.5q0-92 65.5-158t158.5-66q92 0 158 66t66 158z"></path>
+                    </svg>
+                    loading...
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="text-xl btn btn-wide text-white bg-gray-800 hover:bg-gray-900 rounded-2xl"
+                  >
+                    Login
+                  </button>
+                )}
+              </div>
+            </form>
           </div>
         </div>
         <div className="w-40 h-40 absolute bg-black rounded-full top-0 right-12 hidden md:block"></div>

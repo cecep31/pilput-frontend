@@ -5,6 +5,7 @@ import { useState,useEffect } from "react";
 import Navigation from "../components/header/Navigation";
 import Link from "next/link";
 import { getCookie } from "cookies-next";
+import Footer from "../components/footer/footer";
 
 const navigation = [
   { name: "Product", href: "#" },
@@ -226,7 +227,7 @@ export default function Example() {
       </div>
       <main>
         <div className="relative px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
+          <div className="mx-auto max-w-3xl pt-5 pb-32 sm:pt-32 sm:pb-40">
             <div>
               <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                 <div className="relative overflow-hidden rounded-full py-1.5 px-4 text-sm leading-6 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
@@ -303,6 +304,7 @@ export default function Example() {
           </div>
         </div>
       </main>
+      <Footer></Footer>
     </div>
   );
 }
