@@ -76,7 +76,7 @@ export default function Login() {
               Sign in
             </h1>
             <p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
-              Lanjut aja login, ngapain baca
+              Lanjut aja login, ngapain baca<br></br>
             </p>
           </div>
           <div>
@@ -101,6 +101,7 @@ export default function Login() {
                 }}
                 className="block text-sm py-3 px-4 rounded-lg w-full border outline-none"
               />
+
               <div className="flex justify-center mt-6">
                 {loginwait ? (
                   <button
@@ -129,6 +130,7 @@ export default function Login() {
                 )}
               </div>
             </form>
+            <p className="text-center mt-3 text-black">username: <strong>admin</strong>; password: <strong>admin</strong></p>
           </div>
         </div>
         <div className="w-40 h-40 absolute bg-black rounded-full top-0 right-12 hidden md:block"></div>
