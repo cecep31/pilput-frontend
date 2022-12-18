@@ -1,8 +1,6 @@
-import Head from "next/head";
+
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
 import { useState,useEffect } from "react";
-import Navigation from "../components/header/Navigation";
 import Link from "next/link";
 import { getCookie } from "cookies-next";
 import Footer from "../components/footer/footer";
@@ -15,7 +13,6 @@ const navigation = [
 ];
 
 export default function Example() {
-  // const [islogged, setislogged] = useState(false);
   const [token, settoken] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

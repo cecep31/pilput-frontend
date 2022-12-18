@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Logged from "../../components/layouts/Logged";
 import nookies from "nookies";
 import axios from "axios";
-import {getCookie} from 'cookies-next'
+import { getCookie } from "cookies-next";
 
 export async function getServerSideProps(ctx) {
   const cookies = nookies.get(ctx);
@@ -20,9 +20,11 @@ export async function getServerSideProps(ctx) {
     props: {}, // will be passed to the page component as props
   };
 }
+
 function Mytask() {
   const [groups, setgroups] = useState([]);
-  const token = getCookie("token")
+  const token = getCookie("token");
+
   // console.log(groups);
   const gettasksgroup = async () => {
     var config = {
@@ -33,10 +35,13 @@ function Mytask() {
         "Content-Type": "application/json",
       },
     };
-
-    let response = await axios(config);
-    setgroups(response.data);
-    console.log(response.data);
+    try {
+      const response = await axios(config);
+      setgroups(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
   useEffect(() => {
     gettasksgroup();
@@ -50,11 +55,21 @@ function Mytask() {
       <div className="bg-white p-5 rounded-xl shadow-lg mt-5">
         {groups.map((data, key) => {
           return (
-            <div key={key}>
-              <div className="text-green-800 text-4xl">{data.name}</div>
-              <button className="bg-green-500 py-1 px-2 rounded-lg text-white hover:bg-green-700">
-                Add Task
-              </button>
+            <div key={key} className="w-64 bg-slate-200 p-2">
+              <div className="text-green-800 bg-green-500 px-2 py-2 text-4xl">
+                {data.name}
+              </div>
+              <div className="space-y-3 mt-2">
+                {data.Task.map((task) => (
+                  <div key={task.id} className="bg-white rounded-md p-2">
+                    <div>{task.title}</div>
+                    <p>{task.desc}</p>
+                  </div>
+                ))}
+                <button className="bg-green-500 py-1 px-2 rounded-lg text-white hover:bg-green-700 w-full">
+                  Add Task
+                </button>
+              </div>
             </div>
           );
         })}
