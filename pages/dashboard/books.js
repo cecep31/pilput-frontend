@@ -53,7 +53,7 @@ const Books = () => {
         {/* <div>Add Books</div> */}
         <div className="grid grid-cols-5 grid-flow-col gap-3 w-full">
           {books.map((book) => (
-            <div key={book.id} className="w-full shadow-xl rounded-lg">
+            <div key={book.id} className="w-full shadow-xl bg-white rounded-lg">
               <figure className="px-10 pt-10">
                 <Image
                   src="https://placeimg.com/400/225/arch"
