@@ -51,7 +51,7 @@ const Books = () => {
           <h1>Books</h1>
         </div>
         {/* <div>Add Books</div> */}
-        <div className="grid grid-cols-5 grid-flow-col gap-4 w-full">
+        <div className="grid grid-rows-2 grid-flow-col gap-4">
           {books.map((book) => (
             <div key={book.id} className="w-full shadow-xl bg-white rounded-lg mt-4">
               <figure className="px-10 pt-10">
