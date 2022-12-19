@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import nookies, { parseCookies } from "nookies";
 import router from "next/router";
+import { getCookie, deleteCookie } from "cookies-next";
 
 export default function Navigation() {
-  const [islogged, setislogged] = useState();
+  const [token, settoken] = useState(false);
 
   useEffect(() => {
-    const cookies = parseCookies();
-    if (cookies.token) {
-      setislogged(true);
-    } else {
-      setislogged(false);
-    }
+    settoken(getCookie("token"));
   }, []);
+
   function handleLogout() {
-    nookies.destroy(null, "token");
+    deleteCookie("token");
     router.push("/login");
   }
 
   // console.log(JSON.parse(islogged));
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 px-5 pt-5">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -46,7 +42,7 @@ export default function Navigation() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Item 1</a>
+              <a>About</a>
             </li>
             <li tabIndex={0}>
               <a className="justify-between">
@@ -71,46 +67,33 @@ export default function Navigation() {
               </ul>
             </li>
             <li>
-              <a>Item 3</a>
+              <a>Contact</a>
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+        <a className="btn btn-ghost normal-case text-xl">pilput</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Item 1</a>
+            <a>About</a>
           </li>
-          <li tabIndex={0}>
-            <a>
-              Parent
-              <svg
-                className="fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-              >
-                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-              </svg>
-            </a>
-            <ul className="p-2">
-              <li>
-                <a>Submenu 1</a>
-              </li>
-              <li>
-                <a>Submenu 2</a>
-              </li>
-            </ul>
-          </li>
+       
           <li>
-            <a>Item 3</a>
+            <a>contact</a>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Get started</a>
+        {token ? (
+          <Link href="/dashboard" className="btn">
+            Dashboard
+          </Link>
+        ) : (
+          <Link href="/login" className="btn">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

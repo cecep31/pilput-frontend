@@ -13,17 +13,10 @@ const navigation = [
   { name: "Company", href: "#" },
 ];
 
-export default function Example() {
-  const [token, settoken] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    settoken(getCookie("token"));
-  }, []);
-
+export default function Home() {
   return (
     <div className="isolate bg-white">
-      <Navigation/>
+      <Navigation />
       <div className="hero min-h-screen bg-base-100">
         <div className="hero-content text-center">
           <div className="max-w-md">

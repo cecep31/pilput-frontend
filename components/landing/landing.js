@@ -6,7 +6,6 @@ const Landing = () => {
     <div className="flex items-center">
       <div className="container relative flex flex-col items-center justify-between px-6 py-4 mx-auto">
         <div className="flex flex-col">
-          
           <p className="my-6 text-3xl text-center dark:text-white">
             Hi, I&#x27;m Charlie 🤘
           </p>
