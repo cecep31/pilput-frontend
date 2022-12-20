@@ -18,7 +18,7 @@ export default function Navigation() {
   // console.log(JSON.parse(islogged));
 
   return (
-    <div className="navbar bg-base-100 px-5 pt-5">
+    <div className="navbar bg-base-100 px-5 py-5">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
