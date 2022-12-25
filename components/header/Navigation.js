@@ -69,18 +69,24 @@ export default function Navigation() {
             <li>
               <a>Contact</a>
             </li>
+            <li>
+              <Link href="/blog">Blog</Link>
+            </li>
           </ul>
         </div>
-        <a className="btn btn-ghost normal-case text-xl">pilput</a>
+        <Link href="/" className="btn btn-ghost normal-case text-xl">pilput</Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
             <a>About</a>
           </li>
-       
+
           <li>
             <a>contact</a>
+          </li>
+          <li>
+            <Link href="/blog">Blog</Link>
           </li>
         </ul>
       </div>

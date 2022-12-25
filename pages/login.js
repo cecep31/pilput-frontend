@@ -4,16 +4,15 @@ import Navigation from "../components/header/Navigation";
 import axios from "axios";
 import localforage from "localforage";
 import router, { useRouter } from "next/router";
-import { setCookie } from "cookies-next";
-import nookies from "nookies";
+import { setCookie,getCookie } from "cookies-next";
 
 export async function getServerSideProps(ctx) {
-  const cookies = nookies.get(ctx);
+  const token = getCookie("token");
   // console.log(cookies.token);
-  if (cookies.token) {
+  if (token) {
     return {
       redirect: {
-        destination: "/",
+        destination: "/dashboard",
         permanent: false,
       },
     };
