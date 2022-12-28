@@ -65,7 +65,7 @@ function ManageUser(props) {
   function deleteUser(id) {
     var config = {
       method: "delete",
-      url: `https://api.pilput.my.id/api/v1/users/${id}`,
+      url: props.apihost+`/api/v1/users/${id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -105,7 +105,7 @@ function ManageUser(props) {
 
     var config = {
       method: "post",
-      url: "https://api.pilput.my.id/api/v1/users",
+      url: props.apihost+"/api/v1/users",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
