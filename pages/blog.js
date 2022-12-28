@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../components/header/Navigation";
-import { getCookie } from "cookies-next";
 import axios from "axios";
 import Postlist from "../components/post/Postlist";
 import Footer from "../components/footer/footer";
+import Postlistpulse from "../components/post/postlistpulse";
 
-const Blog = () => {
-  //   const token = getCookie("token");
+export async function getServerSideProps() {
+  const apihost = process.env.API_HOST;
+  return {
+    props: { apihost },
+  };
+}
+
+const Blog = (props) => {
   const [posts, setposts] = useState([]);
-  async function getPosts(params) {
+  async function getPosts() {
     try {
-      let response = await axios.get("https://api.pilput.my.id/api/v1/posts");
+      let response = await axios.get(props.apihost + "/api/v1/posts");
       setposts(response.data);
     } catch (error) {
       console.error(error);
@@ -19,16 +25,21 @@ const Blog = () => {
   useEffect(() => {
     getPosts();
   }, []);
+
+  let postsshow;
+  if (posts.length) {
+    postsshow = posts.map((post) => <Postlist key={post.id} post={post} />);
+  } else {
+    postsshow = <Postlistpulse />;
+  }
+
   return (
     <div>
       <Navigation></Navigation>
       <div className="mx-auto bg-gray-50 p-3 max-w-7xl">
         <h2 className="text-2xl font-semibold">Post</h2>
-        <div className="mb-10">
-          {posts.map((post) => (
-            <Postlist key={post.id} post={post} />
-          ))}
-        </div>
+        <div className="mb-10"></div>
+        {postsshow}
       </div>
       <Footer />
     </div>

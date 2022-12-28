@@ -6,7 +6,7 @@ import { getCookie } from "cookies-next";
 
 export async function getServerSideProps(ctx) {
   const cookies = nookies.get(ctx);
-  // console.log(cookies.token);
+  const apihost = process.env.API_HOST;
   if (!cookies.token) {
     return {
       redirect: {
@@ -17,19 +17,18 @@ export async function getServerSideProps(ctx) {
   }
 
   return {
-    props: {}, // will be passed to the page component as props
+    props: { apihost }, // will be passed to the page component as props
   };
 }
 
-function Mytask() {
+function Mytask(props) {
   const [groups, setgroups] = useState([]);
   const token = getCookie("token");
 
-  // console.log(groups);
   const gettasksgroup = async () => {
     var config = {
       method: "get",
-      url: "https://api.pilput.my.id/api/v1/mytaskgroups",
+      url: props.apihost + "/api/v1/mytaskgroups",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",

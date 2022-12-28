@@ -8,6 +8,7 @@ import Modal from "../../components/user/Modal";
 
 export async function getServerSideProps(ctx) {
   const token = getCookie("token");
+  const apihost = process.env.API_HOST;
   if (token) {
     return {
       redirect: {
@@ -18,11 +19,11 @@ export async function getServerSideProps(ctx) {
   }
 
   return {
-    props: {}, // will be passed to the page component as props
+    props: { apihost }, // will be passed to the page component as props
   };
 }
 
-function ManageUser() {
+function ManageUser(props) {
   const [users, setusers] = useState([]);
   const [username, setusername] = useState();
   const [email, setemail] = useState();
@@ -39,7 +40,7 @@ function ManageUser() {
   async function getUsers() {
     var config = {
       method: "get",
-      url: "https://api.pilput.my.id/api/v1/users",
+      url: props.apihost + "/api/v1/users",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -54,7 +55,7 @@ function ManageUser() {
     //     console.log(error);
     //   });
     try {
-      const response = await axios(config)
+      const response = await axios(config);
       setusers(response.data);
     } catch (error) {
       console.error(error);
@@ -76,7 +77,7 @@ function ManageUser() {
         getUsers();
       })
       .catch(function (error) {
-        console.log(error);
+        console.error(error);
       });
   }
 
@@ -194,13 +195,12 @@ function ManageUser() {
 
                       <td className="p-2 whitespace-nowrap">
                         <div id={user.id} className="text-lg text-center">
-                          <button
-                            onClick={() => {
+                          <div className="tooltip" data-tip="hello">
+                            <button className="btn" onClick={() => {
                               deleteUser(user.id);
-                            }}
-                          >
-                            Delete
-                          </button>
+                            }}>Delete</button>
+                          </div>
+                          
                         </div>
                       </td>
                     </tr>

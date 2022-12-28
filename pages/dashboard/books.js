@@ -7,6 +7,7 @@ import Image from "next/image";
 
 export async function getServerSideProps(ctx) {
   const token = getCookie("token");
+  const apihost = process.env.API_HOST
   // console.log(cookies.token);
   if (token) {
     return {
@@ -17,17 +18,17 @@ export async function getServerSideProps(ctx) {
     };
   }
   return {
-    props: {}, // will be passed to the page component as props
+    props: {apihost}, // will be passed to the page component as props
   };
 }
-const Books = () => {
+const Books = (props) => {
   const [books, setbooks] = useState([]);
   const token = getCookie("token");
 
   async function getBooks() {
     var config = {
       method: "GET",
-      url: "https://api.pilput.my.id/api/v1/books",
+      url: props.apihost+"/api/v1/books",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -35,7 +36,6 @@ const Books = () => {
     };
     try {
       const response = await axios(config);
-      console.log(response);
       setbooks(response.data);
     } catch (error) {
       console.error(error);

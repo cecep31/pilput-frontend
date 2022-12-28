@@ -5,6 +5,7 @@ import axios from "axios";
 import localforage from "localforage";
 import router, { useRouter } from "next/router";
 import { setCookie,getCookie } from "cookies-next";
+import Link from "next/link";
 
 export async function getServerSideProps(ctx) {
   const token = getCookie("token");
@@ -130,6 +131,10 @@ export default function Login() {
               </div>
             </form>
             <p className="text-center mt-3 text-black">username: <strong>admin</strong>; password: <strong>admin</strong></p>
+            <div className="text-center">
+
+            <Link className="ink link-info " href="/">Back</Link>
+            </div>
           </div>
         </div>
         <div className="w-40 h-40 absolute bg-black rounded-full top-0 right-12 hidden md:block"></div>
