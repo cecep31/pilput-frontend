@@ -4,11 +4,12 @@ import Navigation from "../components/header/Navigation";
 import axios from "axios";
 import localforage from "localforage";
 import router, { useRouter } from "next/router";
-import { setCookie,getCookie } from "cookies-next";
+import { setCookie, getCookie } from "cookies-next";
 import Link from "next/link";
 
 export async function getServerSideProps(ctx) {
   const token = getCookie("token");
+  const apihost = process.env.API_HOST;
   // console.log(cookies.token);
   if (token) {
     return {
@@ -19,11 +20,11 @@ export async function getServerSideProps(ctx) {
     };
   }
   return {
-    props: {}, // will be passed to the page component as props
+    props: { apihost }, // will be passed to the page component as props
   };
 }
 
-export default function Login() {
+export default function Login(props) {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [loginwait, setloginwait] = useState(false);
@@ -33,9 +34,6 @@ export default function Login() {
     e.preventDefault();
     console.log("hahah");
     setloginwait(true);
-    // console.log(username);
-    // console.log("loginwait");
-    // console.log(password);
     var data = JSON.stringify({
       identity: username,
       password: password,
@@ -43,7 +41,7 @@ export default function Login() {
 
     var config = {
       method: "post",
-      url: "https://api.pilput.my.id/api/auth/login",
+      url: props.apihost + "/api/auth/login",
       headers: {
         "Content-Type": "application/json",
       },
@@ -130,10 +128,13 @@ export default function Login() {
                 )}
               </div>
             </form>
-            <p className="text-center mt-3 text-black">username: <strong>admin</strong>; password: <strong>admin</strong></p>
+            <p className="text-center mt-3 text-black">
+              username: <strong>admin</strong>; password: <strong>admin</strong>
+            </p>
             <div className="text-center">
-
-            <Link className="ink link-info " href="/">Back</Link>
+              <Link className="ink link-info " href="/">
+                Back
+              </Link>
             </div>
           </div>
         </div>
