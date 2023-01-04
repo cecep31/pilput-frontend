@@ -51,11 +51,11 @@ function Mytask(props) {
       <div className="bg-white p-5 rounded-xl shadow-lg">
         <h1 className="text-2xl">My Tasks</h1>
       </div>
-      <div className="bg-white p-5 rounded-xl shadow-lg mt-5">
+      <div className=" p-5 rounded-xl shadow-lg mt-5 bg-slate-200 min-h-screen">
         {groups.map((data, key) => {
           return (
-            <div key={key} className="w-64 bg-slate-200 p-2">
-              <div className="text-green-800 bg-green-500 px-2 py-2 text-4xl">
+            <div key={key} className="w-64 bg-slate-200 p-2 h-full">
+              <div className="text-green-800 bg-blue-200 rounded-t-lg px-2 py-2 text-4xl">
                 {data.name}
               </div>
               <div className="space-y-3 mt-2">
@@ -65,7 +65,7 @@ function Mytask(props) {
                     <p>{task.desc}</p>
                   </div>
                 ))}
-                <button className="bg-green-500 py-1 px-2 rounded-lg text-white hover:bg-green-700 w-full">
+                <button className="bg-blue-400 py-1 px-2 rounded-lg text-white hover:bg-blue-500 w-full">
                   Add Task
                 </button>
               </div>

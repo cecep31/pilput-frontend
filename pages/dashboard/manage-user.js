@@ -65,7 +65,7 @@ function ManageUser(props) {
   function deleteUser(id) {
     var config = {
       method: "delete",
-      url: props.apihost+`/api/v1/users/${id}`,
+      url: props.apihost + `/api/v1/users/${id}`,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -105,7 +105,7 @@ function ManageUser(props) {
 
     var config = {
       method: "post",
-      url: props.apihost+"/api/v1/users",
+      url: props.apihost + "/api/v1/users",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -152,13 +152,16 @@ function ManageUser(props) {
               <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                 <tr>
                   <th className="p-2 whitespace-nowrap">
+                    <div className="font-semibold text-left">Username</div>
+                  </th>
+                  <th className="p-2 whitespace-nowrap">
                     <div className="font-semibold text-left">Name</div>
                   </th>
                   <th className="p-2 whitespace-nowrap">
                     <div className="font-semibold text-left">Email</div>
                   </th>
                   <th className="p-2 whitespace-nowrap">
-                    <div className="font-semibold text-left">Role</div>
+                    <div className="font-semibold text-left">Super admin</div>
                   </th>
 
                   <th className="p-2 whitespace-nowrap">
@@ -187,20 +190,46 @@ function ManageUser(props) {
                         </div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{user.email}</div>
+                        <div className="text-left">{user.name}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{user.role}</div>
+                        <div className="text-left">{user.email}</div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap ">
+                        <div className="text-left">
+                          {user.issuperadmin ? (
+                            <span>Yes</span>
+                          ) : (
+                            <span>No</span>
+                          )}
+                        </div>
                       </td>
 
                       <td className="p-2 whitespace-nowrap">
                         <div id={user.id} className="text-lg text-center">
-                          <div className="tooltip" data-tip="hello">
-                            <button className="btn" onClick={() => {
-                              deleteUser(user.id);
-                            }}>Delete</button>
+                          <div className="tooltip" data-tip="Delete This User">
+                            <button
+                              className="bg-transparent text-red-400 hover:text-red-600"
+                              onClick={() => {
+                                deleteUser(user.id);
+                              }}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
+                                />
+                              </svg>
+                            </button>
                           </div>
-                          
                         </div>
                       </td>
                     </tr>
