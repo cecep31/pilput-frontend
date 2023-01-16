@@ -7,7 +7,7 @@ const Postlist = (props) => {
         <h2 className="card-title">{props.post.title}</h2>
         <p>{props.post.desc}</p>
         <div className="card-actions justify-end">
-          <Link href={"/post/"+props.post.id} className="btn">Show More</Link>
+          <Link href={"/posts/"+props.post.id} className="btn">Show More</Link>
         </div>
       </div>
     </div>

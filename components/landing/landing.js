@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Landing = () => {
@@ -7,11 +8,11 @@ const Landing = () => {
         <div className="max-w-md">
           <h1 className="text-5xl text-white font-bold">Hello there</h1>
           <p className="py-6 text-gray-400">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            My Name Cecep Januardi and i am Web Developer 
+            <br></br>
+            I am interested in Backend And Clound Computing
           </p>
-          <button className="btn btn-primary">Get Started</button>
+          <Link href="/dashboard" className="btn btn-primary">Get Started</Link>
         </div>
       </div>
     </div>

@@ -16,8 +16,8 @@ export default function Logged({ children }) {
   return (
     <main className="bg-gray-100 dark:bg-gray-800 h-screen overflow-hidden relative">
       <div className="flex items-start justify-between">
-        <div className="h-screen hidden lg:block my-4 ml-4 shadow-lg relative w-80">
-          <div className="bg-white h-full rounded-2xl dark:bg-gray-700">
+        <div className="h-screen hidden lg:block shadow-lg relative w-80">
+          <div className="bg-white h-full rounded-lg dark:bg-gray-700">
             <div className="flex items-center justify-center pt-6 font-bold text-3xl text-gray-700">
             <Link href="/">PILPUT</Link>
               
@@ -174,7 +174,7 @@ export default function Logged({ children }) {
           </div>
         </div>
         <div className="flex flex-col w-full pl-0 md:p-4 md:space-y-4">
-          <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 rounded-2xl z-20">
+          <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 rounded-lg z-20">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
               <div className="relative items-center pl-1 flex w-full lg:max-w-68 sm:pr-2 sm:ml-0">
                 <div className="container relative left-0 z-50 flex w-3/4 h-full">
@@ -198,7 +198,7 @@ export default function Logged({ children }) {
                     </svg>
                     <input
                       type="text"
-                      className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-2xl focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input"
+                      className="block w-full py-1.5 pl-10 pr-4 leading-normal rounded-lg focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500 ring-opacity-90 bg-gray-100 dark:bg-gray-800 text-gray-400 aa-input"
                       placeholder="Search"
                     />
                     <div className="absolute right-0 hidden h-auto px-2 py-1 mr-2 text-xs text-gray-400 border border-gray-300 rounded-2xl md:block">
