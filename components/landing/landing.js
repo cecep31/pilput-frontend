@@ -10,7 +10,7 @@ const Landing = () => {
           <p className="py-6 text-gray-400">
             My Name Cecep Januardi and i am Web Developer 
             <br></br>
-            I am interested in Backend And Clound Computing
+            I am interested in Web And Clound Computing
           </p>
           <Link href="/dashboard" className="btn btn-primary">Get Started</Link>
         </div>
