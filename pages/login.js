@@ -104,7 +104,7 @@ export default function Login(props) {
                 {loginwait ? (
                   <button
                     type="button"
-                    className="btn btn-wide flex justify-center items-center  bg-gray-800 hover:bg-gray-900 focus:ring-gray-500 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-2xl "
+                    className="btn btn-wide flex justify-center items-center  bg-gray-800 hover:bg-gray-900 focus:ring-gray-500 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-2xl cursor-not-allowed"
                   >
                     <svg
                       width="20"

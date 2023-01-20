@@ -22,10 +22,11 @@ export default function Dashboard() {
   return (
     <>
       <Logged>
-        <Link className="text-blue-500" href="/">
-          Home
-        </Link>
-   
+        <div className="min-h-screen bg-white rounded-lg p-3">
+          <Link className="text-blue-500" href="/">
+            Home
+          </Link>
+        </div>
       </Logged>
     </>
   );

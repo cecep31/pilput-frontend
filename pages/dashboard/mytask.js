@@ -51,7 +51,7 @@ function Mytask(props) {
       <div className="bg-white p-5 rounded-xl shadow-lg">
         <h1 className="text-2xl">My Tasks</h1>
       </div>
-      <div className=" p-5 rounded-xl shadow-lg mt-5 bg-slate-200 min-h-screen">
+      <div className="flex p-5 rounded-xl shadow-lg mt-5 bg-slate-200 min-h-screen">
         {groups.map((data, key) => {
           return (
             <div key={key} className="w-64 bg-slate-200 p-2 h-full">
