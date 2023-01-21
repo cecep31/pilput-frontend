@@ -1,17 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import Navigation from "../components/header/Navigation";
 import axios from "axios";
-import localforage from "localforage";
-import router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { setCookie, getCookie } from "cookies-next";
 import Link from "next/link";
 
-export async function getServerSideProps(ctx) {
-  const token = getCookie("token");
+export async function getServerSideProps({req,res}) {
+  const token = getCookie("token",{req,res});
   const apihost = process.env.API_HOST;
-  // console.log(cookies.token);
+  console.log(token);
   if (token) {
+    console.log(token);
     return {
       redirect: {
         destination: "/dashboard",

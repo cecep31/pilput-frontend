@@ -1,11 +1,10 @@
 import Link from "next/link";
-import nookies from "nookies";
+import { getCookie } from "cookies-next";
 import Logged from "../../components/layouts/Logged";
 
-export async function getServerSideProps(ctx) {
-  const cookies = nookies.get(ctx);
-  // console.log(cookies.token);
-  if (!cookies.token) {
+export async function getServerSideProps({ req, res }) {
+  let token = getCookie("token", { req, res });
+  if (!token) {
     return {
       redirect: {
         destination: "/login",

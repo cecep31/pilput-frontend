@@ -8,11 +8,17 @@ const Landing = () => {
         <div className="max-w-md">
           <h1 className="text-5xl text-white font-bold">Hello there</h1>
           <p className="py-6 text-gray-400">
-            My Name Cecep Januardi and i am Web Developer 
-            <br></br>
-            I am interested in Web And Clound Computing
+            My Name Cecep Januardi and i am Web Developer
+            <br></br>I am interested in Web And Clound Computing
           </p>
-          <Link href="/dashboard" className="btn btn-primary">Get Started</Link>
+          <div className="flex gap-2 justify-center">
+            <Link href="/dashboard" className="btn btn-primary">
+              Get Started
+            </Link>
+            <Link href="/chat" className="btn">
+              Chat
+            </Link>
+          </div>
         </div>
       </div>
     </div>

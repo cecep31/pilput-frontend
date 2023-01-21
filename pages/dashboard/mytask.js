@@ -4,10 +4,10 @@ import nookies from "nookies";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 
-export async function getServerSideProps(ctx) {
-  const cookies = nookies.get(ctx);
+export async function getServerSideProps({req,res}) {
+  const token = getCookie("token",{req,res});
   const apihost = process.env.API_HOST;
-  if (!cookies.token) {
+  if (!token) {
     return {
       redirect: {
         destination: "/login",
@@ -51,7 +51,7 @@ function Mytask(props) {
       <div className="bg-white p-5 rounded-xl shadow-lg">
         <h1 className="text-2xl">My Tasks</h1>
       </div>
-      <div className="flex p-5 rounded-xl shadow-lg mt-5 bg-slate-200 min-h-screen">
+      <div className="flex p-5 rounded-xl overflow-x-scroll w-full shadow-lg mt-5 bg-slate-200 min-h-screen">
         {groups.map((data, key) => {
           return (
             <div key={key} className="w-64 bg-slate-200 p-2 h-full">

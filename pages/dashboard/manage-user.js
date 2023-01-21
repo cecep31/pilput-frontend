@@ -1,15 +1,14 @@
-import React, { useState, useEffect, use } from "react";
-import nookies from "nookies";
+import React, { useState, useEffect } from "react";
 import { getCookie } from "cookies-next";
 import Logged from "../../components/layouts/Logged";
 import Image from "next/image";
 import axios from "axios";
 import Modal from "../../components/user/Modal";
 
-export async function getServerSideProps(ctx) {
-  const token = getCookie("token");
+export async function getServerSideProps({ req, res }) {
+  const token = getCookie("token", { req, res });
   const apihost = process.env.API_HOST;
-  if (token) {
+  if (!token) {
     return {
       redirect: {
         destination: "/login",
@@ -19,7 +18,7 @@ export async function getServerSideProps(ctx) {
   }
 
   return {
-    props: { apihost }, // will be passed to the page component as props
+    props: { apihost,token }, // will be passed to the page component as props
   };
 }
 
@@ -31,7 +30,6 @@ function ManageUser(props) {
   const [password, setpassword] = useState();
   const [repassword, setrepassword] = useState();
   const [modaluser, setmodaluser] = useState(false);
-  const [token, settoken] = useState(getCookie("token"));
 
   useEffect(() => {
     getUsers();
@@ -43,17 +41,9 @@ function ManageUser(props) {
       url: props.apihost + "/api/v1/users",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${props.token}`,
       },
     };
-
-    // axios(config)
-    //   .then(function (response) {
-    //     setusers(response.data);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
     try {
       const response = await axios(config);
       setusers(response.data);
@@ -123,7 +113,7 @@ function ManageUser(props) {
       <div className="bg-white p-5 rounded-xl shadow-lg">
         <h1>Manage user</h1>
       </div>
-      <div className="w-full  mx-auto bg-white shadow-lg border border-gray-200 mt-3 rounded-xl">
+      <div className="w-full mx-auto bg-white shadow-lg border border-gray-200 mt-3 rounded-xl">
         <header className="px-5 py-4 border-b border-gray-100">
           <span className="font-semibold text-gray-800">Users</span>
           <button

@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Logged from "../../components/layouts/Logged";
-import nookies from "nookies";
 import { getCookie } from "cookies-next";
 import axios from "axios";
 import Image from "next/image";
 
-export async function getServerSideProps(ctx) {
-  const token = getCookie("token");
-  const apihost = process.env.API_HOST
-  // console.log(cookies.token);
-  if (token) {
+export async function getServerSideProps({ req, res }) {
+  const token = getCookie("token", { req, res });
+  const apihost = process.env.API_HOST;
+  if (!token) {
     return {
       redirect: {
         destination: "/login",
@@ -18,7 +16,7 @@ export async function getServerSideProps(ctx) {
     };
   }
   return {
-    props: {apihost}, // will be passed to the page component as props
+    props: { apihost }, // will be passed to the page component as props
   };
 }
 const Books = (props) => {
@@ -28,7 +26,7 @@ const Books = (props) => {
   async function getBooks() {
     var config = {
       method: "GET",
-      url: props.apihost+"/api/v1/books",
+      url: props.apihost + "/api/v1/books",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -54,7 +52,10 @@ const Books = (props) => {
         {/* <div>Add Books</div> */}
         <div className="grid grid-rows-4 gap-4">
           {books.map((book) => (
-            <div key={book.id} className="w-full shadow-xl bg-white rounded-lg mt-4">
+            <div
+              key={book.id}
+              className="w-full shadow-xl bg-white rounded-lg mt-4"
+            >
               <figure className="px-10 pt-10">
                 <Image
                   src="https://placeimg.com/400/225/arch"
