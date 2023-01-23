@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Logged from "../../components/layouts/Logged";
-import nookies from "nookies";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 

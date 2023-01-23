@@ -16,7 +16,7 @@ const navigation = [
 export default function Home() {
   return (
     <div className="isolate bg-white">
-      <Navigation />
+      {/* <Navigation /> */}
       <Landing></Landing>
       <Footer></Footer>
     </div>
