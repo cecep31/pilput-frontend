@@ -154,7 +154,7 @@ export default function Logged({ children }) {
             </nav>
           </div>
         </div>
-        <div className="flex flex-col w-full pl-0 md:p-4 md:space-y-4">
+        <div className="flex flex-col w-full h-screen pl-0 md:p-4 md:space-y-4">
           <header className="w-full shadow-lg bg-white dark:bg-gray-700 items-center h-16 rounded-lg z-20">
             <div className="relative z-20 flex flex-col justify-center h-full px-3 mx-auto flex-center">
               <div className="relative items-center pl-1 flex w-full sm:pr-2 sm:ml-0">
@@ -203,7 +203,7 @@ export default function Logged({ children }) {
               </div>
             </div>
           </header>
-          <div className="overflow-x-scroll w-full h-screen pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0 text-gray-600">
+          <div className="overflow-hidden max-w-7xl h-full pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0 text-gray-600">
             {children}
           </div>
         </div>
