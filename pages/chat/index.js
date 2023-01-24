@@ -44,10 +44,10 @@ const Chat = () => {
           </div>
         </div>
         <div className="flex flex-col relative w-full">
-          <div className="h-screen flex justify-center px-4 pb-24 overflow-auto bg-gray-600 md:px-6">
+          <div className="h-screen flex justify-center px-4 pb-24 overflow-auto bg-zinc-700 md:px-6">
             <div>Chat</div>
           </div>
-          <div className="absolute bottom-0 items-center justify-between bg-gray-700 w-full h-16">
+          <div className="absolute bottom-0 items-center justify-between bg-zinc-700 w-full h-24">
             <div className="block ml-6 lg:hidden">
               <button className="flex items-center p-2 text-gray-500 bg-white rounded-full shadow text-md">
                 <svg
@@ -62,12 +62,12 @@ const Chat = () => {
                 </svg>
               </button>
             </div>
-            <div className="relative z-20 flex flex-col justify-center h-full px-3 md:w-full">
+            <div className="relative z-20 flex flex-col justify-center h-full px-3 py-4 md:w-full">
               <div className="relative flex items-center justify-center mx-72 p-1 space-x-4">
-                <PaperAirplaneIcon className="absolute text-gray-400 right-5 h-5" />
+                <PaperAirplaneIcon className="absolute text-zinc-400 right-5 h-5" />
                 <input
                   type="text"
-                  className="w-full py-1 px-3 items-center text-gray-200 bg-gray-600 shadow h-10 rounded-lg"
+                  className="w-full py-1 px-3 items-center text-gray-200 bg-zinc-600 shadow-lg focus:ring-0 focus:outline-none h-12 rounded-lg"
                 ></input>
               </div>
             </div>

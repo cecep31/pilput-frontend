@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import router from "next/router";
 import { getCookie, deleteCookie } from "cookies-next";
+import { EnvelopeIcon } from "@heroicons/react/24/outline";
 
 export default function Navigation() {
   const [token, settoken] = useState(false);
@@ -18,68 +19,35 @@ export default function Navigation() {
   // console.log(JSON.parse(islogged));
 
   return (
-    <div className="navbar bg-base-100 px-5 py-5">
-      <div className="navbar-start">
-        <div className="dropdown">
-          <label tabIndex={0} className="btn btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a>About</a>
-            </li>
-            <li>
-              <a>Contact</a>
-            </li>
-            <li>
-              <Link href="/blog">Blog</Link>
-            </li>
-          </ul>
+    <header className="z-30 flex items-center w-full sm:h-24">
+      <div className="container flex items-center justify-between px-6 mx-auto">
+        <div className="flex items-center text-3xl font-black text-gray-800 uppercase dark:text-white">
+          <EnvelopeIcon className="h-6" />
+          <span className="mt-1 ml-3 text-xs">cecepjanuardi31@gmail.com</span>
         </div>
-        <Link href="/" className="btn btn-ghost normal-case text-xl">pilput</Link>
+        <div className="flex items-center">
+          <nav className="items-center hidden text-lg text-gray-800 uppercase font-sen dark:text-white lg:flex">
+            <Link href="/" className="flex px-6 py-2 hover:text-black">
+              Home
+            </Link>
+            <Link href="/blog" className="flex px-6 py-2 hover:text-black">
+              Blog
+            </Link>
+            <Link href="/chat" className="flex px-6 py-2 hover:text-black">
+              Chat
+            </Link>
+            <Link href="/dashboard" className="flex px-6 py-2 hover:text-black">
+              Dashbord
+            </Link>
+          </nav>
+          <button className="flex flex-col ml-4 lg:hidden">
+            <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
+            <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
+            <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
+          </button>
+        </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>About</a>
-          </li>
-
-          <li>
-            <a>contact</a>
-          </li>
-          <li>
-            <Link href="/blog">Blog</Link>
-          </li>
-        </ul>
-      </div>
-      <div className="navbar-end">
-        {token ? (
-          <Link href="/dashboard" className="btn">
-            Dashboard
-          </Link>
-        ) : (
-          <Link href="/login" className="btn">
-            Login
-          </Link>
-        )}
-      </div>
-    </div>
+    </header>
   );
 }
 

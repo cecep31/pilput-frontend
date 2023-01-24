@@ -65,8 +65,7 @@ export default function Login(props) {
   return (
     <main className="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
       <div className="min-h-screen flex justify-center items-center">
-        <div className="absolute w-60 h-60 rounded-xl bg-black -top-5 -left-16 z-0 transform rotate-45 hidden md:block"></div>
-        <div className="absolute w-48 h-48 rounded-xl bg-black -bottom-6 -right-10 transform rotate-12 hidden md:block"></div>
+       
         <div className="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
           <div>
             <h1 className="text-3xl font-bold text-center mb-4 cursor-pointer">
@@ -103,7 +102,7 @@ export default function Login(props) {
                 {loginwait ? (
                   <button
                     type="button"
-                    className="btn btn-wide flex justify-center items-center  bg-gray-800 hover:bg-gray-900 focus:ring-gray-500 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-2xl cursor-not-allowed"
+                    className="text-xl w-40 py-2 px-4 flex justify-center items-center bg-gray-800 hover:bg-gray-900 text-white transition ease-in duration-200 text-center font-semibold shadow-md focus:outline-none rounded-2xl cursor-not-allowed"
                   >
                     <svg
                       width="20"
@@ -120,7 +119,7 @@ export default function Login(props) {
                 ) : (
                   <button
                     type="submit"
-                    className="text-xl btn btn-wide text-white bg-gray-800 hover:bg-gray-900 rounded-2xl"
+                    className="text-xl w-40 px-4 py-2 text-white bg-gray-800 hover:bg-gray-900 rounded-2xl"
                   >
                     Login
                   </button>
@@ -131,14 +130,13 @@ export default function Login(props) {
               username: <strong>admin</strong>; password: <strong>admin</strong>
             </p>
             <div className="text-center">
-              <Link className="ink link-info " href="/">
+              <Link className="text-blue-600 underline " href="/">
                 Back
               </Link>
             </div>
           </div>
         </div>
-        <div className="w-40 h-40 absolute bg-black rounded-full top-0 right-12 hidden md:block"></div>
-        <div className="w-20 h-40 absolute bg-black rounded-full bottom-20 left-10 transform rotate-45 hidden md:block"></div>
+       
       </div>
     </main>
   );
