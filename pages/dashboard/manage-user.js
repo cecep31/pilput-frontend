@@ -26,7 +26,6 @@ function ManageUser(props) {
   const [users, setusers] = useState([]);
   const [username, setusername] = useState();
   const [email, setemail] = useState();
-  const [role, setrole] = useState();
   const [password, setpassword] = useState();
   const [repassword, setrepassword] = useState();
   const [modaluser, setmodaluser] = useState(false);
@@ -57,7 +56,7 @@ function ManageUser(props) {
       method: "delete",
       url: props.apihost + `/api/v1/users/${id}`,
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${props.token}`,
       },
     };
 
@@ -89,7 +88,6 @@ function ManageUser(props) {
       username: username,
       email: email,
       password: password,
-      role: role,
       image: "asddasdas",
     });
 
@@ -98,7 +96,7 @@ function ManageUser(props) {
       url: props.apihost + "/api/v1/users",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${props.token}`,
       },
       data: data,
     };
@@ -186,11 +184,11 @@ function ManageUser(props) {
                         <div className="text-left">{user.email}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap ">
-                        <div className="text-left">
+                        <div className="text-left font-semibold">
                           {user.issuperadmin ? (
-                            <span>Yes</span>
+                            <span className="text-purple-900">Yes</span>
                           ) : (
-                            <span>No</span>
+                            <span className="text-blue-700">No</span>
                           )}
                         </div>
                       </td>
@@ -261,22 +259,7 @@ function ManageUser(props) {
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-            <div className="mb-5">
-              <label className="mb-3 block text-base font-medium text-[#07074D]">
-                Email Address
-              </label>
-
-              <select
-                onChange={(e) => {
-                  setrole(e.target.value);
-                }}
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-3 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-              >
-                <option>Select role</option>
-                <option value="admin">Admin</option>
-                <option value="member">User</option>
-              </select>
-            </div>
+         
             <div className="mb-5">
               <label className="mb-3 block text-base font-medium text-[#07074D]">
                 Password

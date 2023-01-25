@@ -36,7 +36,7 @@ const Blog = (props) => {
   return (
     <div>
       <Navigation></Navigation>
-      <div className="mx-auto bg-gray-50 p-3 max-w-7xl">
+      <div className="mx-auto  p-3 max-w-7xl min-h-screen">
         <h2 className="text-2xl font-semibold">Post</h2>
         <div className="mb-10"></div>
         {postsshow}

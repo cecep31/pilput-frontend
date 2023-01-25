@@ -127,11 +127,11 @@ export default function Login(props) {
               </div>
             </form>
             <p className="text-center mt-3 text-black">
-              username: <strong>admin</strong>; password: <strong>admin</strong>
+              username: <strong>admin</strong> password: <strong>admin</strong>
             </p>
             <div className="text-center">
-              <Link className="text-blue-600 underline " href="/">
-                Back
+              <Link className="text-blue-600 underline" href="/">
+                Back Home
               </Link>
             </div>
           </div>

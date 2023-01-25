@@ -2,15 +2,44 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import router, { useRouter } from "next/router";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
+import { Menu, Transition } from "@headlessui/react";
+import {
+  ArrowLeftOnRectangleIcon,
+  HomeIcon,
+  UserCircleIcon,
+} from "@heroicons/react/24/outline";
+import axios from "axios";
+import {gethost} from '../../helpers/gethost';
 
 export default function Logged({ children }) {
   const activerouter = useRouter();
+  const token = getCookie("token");
+  const [yourdata, setyourdata] = useState({ name: "" });
 
   function logout() {
     deleteCookie("token");
     router.push("/");
   }
+  async function getyourdata() {
+    var config = {
+      method: "get",
+      url: "https://api.pilput.dev/api/v1/you",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    try {
+      const response = await axios(config);
+      setyourdata(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    getyourdata();
+  }, []);
 
   return (
     <main className="bg-gray-100 dark:bg-gray-800 h-screen overflow-hidden relative">
@@ -25,7 +54,7 @@ export default function Logged({ children }) {
                 <Link
                   className={`w-full font-thin uppercase ${
                     activerouter.pathname == "/dashboard"
-                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      ? "text-purple-500 border-r-4 border-purple-500 bg-gradient-to-r from-white to-blue-100"
                       : "text-gray-500"
                   }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard"
@@ -47,7 +76,7 @@ export default function Logged({ children }) {
                 <Link
                   className={`w-full font-thin uppercase ${
                     activerouter.pathname == "/dashboard/mytask"
-                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      ? "text-purple-500 border-r-4 border-purple-500 bg-gradient-to-r from-white to-blue-100"
                       : "text-gray-500"
                   }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard/mytask"
@@ -69,7 +98,7 @@ export default function Logged({ children }) {
                 <Link
                   className={`w-full font-thin uppercase ${
                     activerouter.pathname == "/dashboard/books"
-                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      ? "text-purple-500 border-r-4 border-purple-500 bg-gradient-to-r from-white to-blue-100"
                       : "text-gray-500"
                   }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard/books"
@@ -91,7 +120,7 @@ export default function Logged({ children }) {
                 <Link
                   className={`w-full font-thin uppercase ${
                     activerouter.pathname == "/dashboard/manage-user"
-                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      ? "text-purple-500 border-r-4 border-purple-500 bg-gradient-to-r from-white to-blue-100"
                       : "text-gray-500"
                   }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="/dashboard/manage-user"
@@ -111,7 +140,7 @@ export default function Logged({ children }) {
                 <a
                   className={`w-full font-thin uppercase ${
                     activerouter.pathname == "/dashboard/report"
-                      ? "text-blue-500 border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100"
+                      ? "text-purple-500 border-r-4 border-purple-500 bg-gradient-to-r from-white to-blue-100"
                       : "text-gray-500"
                   }  flex items-center p-4 my-2 transition-colors duration-200 justify-start  dark:from-gray-700 dark:to-gray-800`}
                   href="#"
@@ -188,22 +217,57 @@ export default function Logged({ children }) {
                   </div>
                 </div>
                 <div className="relative p-1 flex items-center justify-end w-1/4 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                  <a href="#" className="block relative">
-                    <Image
-                      alt="profil"
-                      width={50}
-                      height={50}
-                      priority
-                      src="https://placeimg.com/640/480/any"
-                      className="mx-auto object-cover rounded-full h-10 w-10"
-                    />
-                  </a>
-                  <button onClick={logout}>Logout</button>
+                  <span className="mr-4 font-semibold">{yourdata.name}</span>
+                  <Menu>
+                    <Menu.Button>
+                      <Image
+                        alt="profil"
+                        width={50}
+                        height={50}
+                        priority
+                        src="https://placeimg.com/640/480/any"
+                        className="mx-auto object-cover rounded-full h-10 w-10"
+                      />
+                    </Menu.Button>
+                    <Transition
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute text-gray-600 right-5 mt-6 w-44 origin-top-right divide-y divide-gray-100 rounded-tl-lg rounded-bl-lg rounded-br-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Item>
+                          <Link
+                            href="/"
+                            className="px-3 rounded-tl-lg py-2 w-full text-left hover:bg-slate-200 flex items-center"
+                          >
+                            <HomeIcon className="h-5 mr-3" /> Go Home Page
+                          </Link>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <button className="px-3 py-2 w-full text-left hover:bg-slate-200 flex items-center">
+                            <UserCircleIcon className="h-5 mr-3" /> Profile
+                          </button>
+                        </Menu.Item>
+                        <Menu.Item>
+                          <button
+                            className="px-3 rounded-b-lg py-2 w-full text-left hover:bg-slate-200 flex items-center"
+                            onClick={logout}
+                          >
+                            <ArrowLeftOnRectangleIcon className="h-5 mr-3" />{" "}
+                            Logout
+                          </button>
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
                 </div>
               </div>
             </div>
           </header>
-          <div className="overflow-hidden max-w-7xl h-full pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0 text-gray-600">
+          <div className="overflow-hidden w-full h-full pb-24 pt-2 pr-2 pl-2 md:pt-0 md:pr-0 md:pl-0 text-gray-600">
             {children}
           </div>
         </div>

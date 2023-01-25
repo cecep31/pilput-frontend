@@ -27,7 +27,7 @@ const Post = (props) => {
   return (
     <>
       <Navigation />
-      <div className="mx-auto bg-gray-50 p-3 max-w-7xl">
+      <div className="mx-auto p-3 max-w-7xl">
         <h2 className="font-bold">Post</h2>
         <div className="">
             <div className="font-semibold text-center">{post.title}</div>
