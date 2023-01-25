@@ -10,7 +10,6 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import axios from "axios";
-import {gethost} from '../../helpers/gethost';
 
 export default function Logged({ children }) {
   const activerouter = useRouter();
