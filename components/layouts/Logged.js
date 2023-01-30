@@ -15,6 +15,7 @@ export default function Logged({ children }) {
   const activerouter = useRouter();
   const token = getCookie("token");
   const [yourdata, setyourdata] = useState({ name: "" });
+  const host = process.env.NEXT_PUBLIC_API_HOST;
 
   function logout() {
     deleteCookie("token");
@@ -23,7 +24,7 @@ export default function Logged({ children }) {
   async function getyourdata() {
     var config = {
       method: "get",
-      url: "https://api.pilput.dev/api/v1/you",
+      url: host+"/api/v1/you",
       headers: {
         Authorization: `Bearer ${token}`,
       },
