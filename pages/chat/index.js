@@ -33,7 +33,7 @@ const Chat = () => {
         <div className="relative hidden h-screen shadow-lg lg:block w-80   ">
           <div className="flex h-full flex-col flex-1 space-y-1 bg-zinc-800 dark:bg-gray-700 text-gray-200 p-2 text-sm">
             <button className="flex w-full hover:bg-zinc-700 items-center justify-start py-3 px-2 border rounded-lg">
-              <PlusSmallIcon className="h-5 w-5" />
+              <PlusSmallIcon className="h-4 w-4" />
               <span className="ml-2">New chat</span>
             </button>
             <nav className="mt-6 overflow-y-auto flex flex-1 flex-col space-y-3 border-b border-white/50">
@@ -45,10 +45,10 @@ const Chat = () => {
               </button>
             </nav>
             <div className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg">
-              <TrashIcon className="h-5 w-5" /> <span>Clear Conversations</span>
+              <TrashIcon className="h-4 w-4" /> <span>Clear Conversations</span>
             </div>
             <div className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg">
-              <SunIcon className="h-5 w-5" />
+              <SunIcon className="h-4 w-4" />
               <span>Light mode</span>
             </div>
             <div className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg">
@@ -64,13 +64,13 @@ const Chat = () => {
               <span>Open Discord</span>
             </div>
             <div className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg">
-              <ArrowTopRightOnSquareIcon className="h-5 w-5" />
+              <ArrowTopRightOnSquareIcon className="h-4 w-4" />
               <span>Update & FAQ</span>
             </div>
-            <div className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg">
-              <ArrowRightOnRectangleIcon className="h-5 w-5" />
+            <Link href="/" className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg">
+              <ArrowRightOnRectangleIcon className="h-4 w-4" />
               <span>Log out</span>
-            </div>
+            </Link>
           </div>
         </div>
         <div className="flex flex-col relative w-full">
