@@ -21,12 +21,12 @@ export default function Navigation() {
   return (
     <header className="z-30 flex items-center w-full sm:h-24">
       <div className="container flex items-center justify-between px-6 mx-auto">
-        <div className="flex items-center text-3xl font-black text-gray-800 uppercase dark:text-white">
+        <div className="flex items-center text-3xl font-black text-gray-800 dark:text-white">
           <EnvelopeIcon className="h-6" />
           <span className="mt-1 ml-3 text-xs">cecepjanuardi31@gmail.com</span>
         </div>
         <div className="flex items-center">
-          <nav className="items-center hidden text-lg text-gray-800 uppercase font-sen dark:text-white lg:flex">
+          <nav className="items-center hidden text-lg text-gray-800 font-sen dark:text-white lg:flex">
             <Link href="/" className="flex px-6 py-2 hover:text-black">
               Home
             </Link>
