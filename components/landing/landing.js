@@ -16,7 +16,7 @@ const Landing = () => {
               Hi, I&#x27;m Cecep
             </p>
             <h2 className="max-w-3xl py-2 mx-auto text-5xl font-bold text-center text-gray-800 md:text-6xl dark:text-white">
-              loreasdas dasdasdawdaw
+              Programmer
             </h2>
             <div className="flex items-center justify-center mt-4">
               <a

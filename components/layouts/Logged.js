@@ -24,7 +24,7 @@ export default function Logged({ children }) {
   async function getyourdata() {
     var config = {
       method: "get",
-      url: host+"/api/v1/you",
+      url: host + "/api/v1/you",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -47,7 +47,9 @@ export default function Logged({ children }) {
         <div className="flex-none h-screen lg:block shadow-lg relative md:w-40 lg:w-64">
           <div className="bg-white h-full rounded-lg dark:bg-gray-700">
             <div className="flex items-center justify-center pt-6 font-bold text-3xl text-gray-700">
-              <Link href="/">PILPUT</Link>
+              <Link href="/">
+                <Image src="/pilput.png" alt="pilput" height="50" width="100" />
+              </Link>
             </div>
             <nav className="mt-6">
               <div>
