@@ -32,10 +32,9 @@ export default function Login(props) {
 
   async function handleLogin(e) {
     e.preventDefault();
-    console.log("hahah");
     setloginwait(true);
     var data = JSON.stringify({
-      identity: username,
+      username: username,
       password: password,
     });
 
@@ -50,11 +49,11 @@ export default function Login(props) {
 
     try {
       const response = await axios(config);
-      if (response.status == 200) {
+      if (response.status === 200) {
         // nookies.set(null, "token", response.data.data);
         setCookie("token", response.data.data);
         router.replace("/dashboard");
-        setloginwait(false);
+        // setloginwait(false);
       }
     } catch (error) {
       console.log(error);
