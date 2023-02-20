@@ -50,10 +50,11 @@ export default function Login(props) {
     try {
       const response = await axios(config);
       if (response.status === 200) {
+        console.log(response);
         // nookies.set(null, "token", response.data.data);
-        setCookie("token", response.data.data);
-        router.replace("/dashboard");
-        // setloginwait(false);
+        setCookie("token", response.data.access_token);
+        router.push("/dashboard");
+        setloginwait(false);
       }
     } catch (error) {
       console.log(error);
