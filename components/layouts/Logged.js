@@ -24,7 +24,7 @@ export default function Logged({ children }) {
   async function getyourdata() {
     var config = {
       method: "get",
-      url: host + "/api/v1/you",
+      url: host + "/api/v1/profile",
       headers: {
         Authorization: `Bearer ${token}`,
       },
