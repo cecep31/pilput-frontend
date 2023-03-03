@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["placeimg.com","tailwindui.com"]
+    domains: ["placeimg.com","tailwindui.com","pilput-storage.s3.ap-southeast-1.amazonaws.com"]
   }
 }
 

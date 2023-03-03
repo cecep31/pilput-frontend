@@ -16,6 +16,7 @@ export default function Logged({ children }) {
   const token = getCookie("token");
   const [yourdata, setyourdata] = useState({ name: "" });
   const host = process.env.NEXT_PUBLIC_API_HOST;
+  const storage = process.env.NEXT_PUBLIC_STORAGE;
 
   function logout() {
     deleteCookie("token");
@@ -222,14 +223,25 @@ export default function Logged({ children }) {
                   <span className="mr-4 font-semibold">{yourdata.name}</span>
                   <Menu>
                     <Menu.Button>
-                      <Image
-                        alt="profil"
-                        width={50}
-                        height={50}
-                        priority
-                        src="https://placeimg.com/640/480/any"
-                        className="mx-auto object-cover rounded-full h-10 w-10"
-                      />
+                      {yourdata.image ? (
+                        <Image
+                          alt="profil"
+                          width={50}
+                          height={50}
+                          priority
+                          src={storage + yourdata.image}
+                          className="mx-auto object-cover rounded-full h-10 w-10"
+                        />
+                      ) : (
+                        <Image
+                          alt="profil"
+                          width={50}
+                          height={50}
+                          priority
+                          src="https://placeimg.com/640/480/any"
+                          className="mx-auto object-cover rounded-full h-10 w-10"
+                        />
+                      )}
                     </Menu.Button>
                     <Transition
                       enter="transition ease-out duration-100"
