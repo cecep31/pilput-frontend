@@ -251,9 +251,9 @@ export default function Logged({ children }) {
                           </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          <button className="px-3 py-2 w-full text-left hover:bg-slate-200 flex items-center">
+                          <Link href="/profile" className="px-3 py-2 w-full text-left hover:bg-slate-200 flex items-center">
                             <UserCircleIcon className="h-5 mr-3" /> Profile
-                          </button>
+                          </Link>
                         </Menu.Item>
                         <Menu.Item>
                           <button
