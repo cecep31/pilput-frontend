@@ -4,6 +4,7 @@ import Logged from "../../components/layouts/Logged";
 import Image from "next/image";
 import axios from "axios";
 import Modal from "../../components/user/Modal";
+import { getData } from "../../lib/fetch";
 
 export async function getServerSideProps({ req, res }) {
   const token = getCookie("token", { req, res });
@@ -18,7 +19,7 @@ export async function getServerSideProps({ req, res }) {
   }
 
   return {
-    props: { apihost,token }, // will be passed to the page component as props
+    props: { apihost, token }, // will be passed to the page component as props
   };
 }
 
@@ -35,19 +36,10 @@ function ManageUser(props) {
   }, []);
 
   async function getUsers() {
-    var config = {
-      method: "get",
-      url: props.apihost + "/api/v1/users",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${props.token}`,
-      },
-    };
-    try {
-      const response = await axios(config);
+    let response = await getData("/api/v1/users");
+    console.log(response.status);
+    if (response.status >= 200 && response.status <= 299) {
       setusers(response.data);
-    } catch (error) {
-      console.error(error);
     }
   }
 
@@ -259,7 +251,7 @@ function ManageUser(props) {
                 className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
               />
             </div>
-         
+
             <div className="mb-5">
               <label className="mb-3 block text-base font-medium text-[#07074D]">
                 Password

@@ -1,11 +1,9 @@
 import Link from "next/link";
 import React from "react";
 import Navigation from "../header/Navigation";
-import { gettoken } from '../../lib/Auth'
 
 const Landing = () => {
-  const rsult = gettoken()
-  console.log(rsult);
+  
   return (
     <main className="relative h-screen overflow-hidden font-mono bg-white dark:bg-gray-800">
       <div className="absolute hidden md:block -bottom-32 -left-32 w-96 h-96 text-blue-500">

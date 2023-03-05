@@ -10,6 +10,7 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import axios from "axios";
+import { getData } from "../../lib/fetch";
 
 export default function Logged({ children }) {
   const activerouter = useRouter();
@@ -23,19 +24,9 @@ export default function Logged({ children }) {
     router.push("/");
   }
   async function getyourdata() {
-    var config = {
-      method: "get",
-      url: host + "/api/v1/profile",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-
-    try {
-      const response = await axios(config);
+    const response = await getData("/api/v1/profile");
+    if (response.status >= 200 && response.status <= 299) {
       setyourdata(response.data);
-    } catch (error) {
-      console.error(error);
     }
   }
   useEffect(() => {
