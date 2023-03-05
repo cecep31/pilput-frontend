@@ -14,9 +14,7 @@ import { getData } from "../../lib/fetch";
 
 export default function Logged({ children }) {
   const activerouter = useRouter();
-  const token = getCookie("token");
-  const [yourdata, setyourdata] = useState({ name: "" });
-  const host = process.env.NEXT_PUBLIC_API_HOST;
+  const [yourdata, setyourdata] = useState({ name: "Loading...",  });
   const storage = process.env.NEXT_PUBLIC_STORAGE;
 
   function logout() {
@@ -222,6 +220,7 @@ export default function Logged({ children }) {
                           priority
                           src={storage + yourdata.image}
                           className="mx-auto object-cover rounded-full h-10 w-10"
+                          unoptimized
                         />
                       ) : (
                         <Image
