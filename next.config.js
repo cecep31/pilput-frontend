@@ -5,7 +5,6 @@ const nextConfig = {
     domains: [
       "placeimg.com",
       "tailwindui.com",
-      "pilput-storage.s3.ap-southeast-1.amazonaws.com",
     ],
   },
 };

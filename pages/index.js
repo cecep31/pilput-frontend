@@ -14,7 +14,7 @@ export default function Home() {
       <div className="isolate bg-white">
         <Navigation />
         <Landing></Landing>
-        <Footer />
+        {/* <Footer /> */}
       </div>
   );
 }

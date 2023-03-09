@@ -1,4 +1,5 @@
 import { getCookie } from "cookies-next";
+import { useState } from "react";
 import {
   ArrowRightOnRectangleIcon,
   ArrowTopRightOnSquareIcon,
@@ -27,6 +28,13 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Chat = () => {
+  const [question, setquestion] = useState("");
+
+  async function sendQuestion(event) {
+    event.preventDefault();
+    alert("Your question "+ question +" is not clear or maybe we don't know, try another question");
+    setquestion("");
+  }
   return (
     <main className="relative h-screen overflow-hidden bg-gray-100 dark:bg-gray-800">
       <div className="flex items-start justify-between">
@@ -67,7 +75,10 @@ const Chat = () => {
               <ArrowTopRightOnSquareIcon className="h-4 w-4" />
               <span>Update & FAQ</span>
             </div>
-            <Link href="/" className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg">
+            <Link
+              href="/"
+              className="cursor-pointer flex space-x-2 py-3 items-center px-3 hover:bg-zinc-700 rounded-lg"
+            >
               <ArrowRightOnRectangleIcon className="h-4 w-4" />
               <span>Log out</span>
             </Link>
@@ -93,13 +104,19 @@ const Chat = () => {
               </button>
             </div>
             <div className="relative z-20 flex flex-col justify-center h-full px-3 py-4 md:w-full">
-              <div className="relative flex items-center justify-center mx-72 p-1 space-x-4">
+              <form
+                onSubmit={sendQuestion}
+                className="relative flex items-center justify-center mx-72 p-1 space-x-4"
+              >
                 <PaperAirplaneIcon className="absolute text-zinc-400 right-5 h-5" />
                 <input
+                  value={question}
+                  onChange={(e) => setquestion(e.target.value)}
                   type="text"
+                  enterKeyHint="alert('wkwkw')"
                   className="w-full py-1 px-3 items-center text-gray-200 bg-zinc-600 shadow-lg focus:ring-0 focus:outline-none h-12 rounded-lg"
                 ></input>
-              </div>
+              </form>
             </div>
           </div>
         </div>

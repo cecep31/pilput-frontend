@@ -30,6 +30,7 @@ function ManageUser(props) {
   const [password, setpassword] = useState();
   const [repassword, setrepassword] = useState();
   const [modaluser, setmodaluser] = useState(false);
+  const hoststorage = process.env.NEXT_PUBLIC_STORAGE;
 
   useEffect(() => {
     getUsers();
@@ -103,7 +104,7 @@ function ManageUser(props) {
       <div className="bg-white p-5 rounded-xl shadow-lg">
         <h1>Manage user</h1>
       </div>
-      <div className="w-full mx-auto bg-white shadow-lg border border-gray-200 mt-3 rounded-xl">
+      <div className="w-full h-full mx-auto bg-white shadow-lg border border-gray-200 mt-3 rounded-xl">
         <header className="px-5 py-4 border-b border-gray-100">
           <span className="font-semibold text-gray-800">Users</span>
           <button
@@ -126,8 +127,8 @@ function ManageUser(props) {
             </svg>
           </button>
         </header>
-        <div className="p-3">
-          <div className="overflow-x-auto">
+        <div className="p-3 h-full">
+          <div className="overflow-x-auto h-full">
             <table className="table-auto w-full">
               <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
                 <tr>
@@ -156,13 +157,23 @@ function ManageUser(props) {
                       <td className="p-2 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
-                            <Image
-                              className="rounded-full"
-                              src="https://placeimg.com/640/480/any"
-                              width="40"
-                              height="40"
-                              alt="Philip Harbach"
-                            />
+                            {user.image ? (
+                              <Image
+                                className="rounded-full"
+                                src={hoststorage+user.image}
+                                width="40"
+                                height="40"
+                                alt="Philip Harbach" unoptimized
+                              />
+                            ) : (
+                              <Image
+                                className="rounded-full"
+                                src="https://placeimg.com/640/480/any"
+                                width="40"
+                                height="40"
+                                alt="Philip Harbach"
+                              />
+                            )}
                           </div>
                           <div className="font-medium text-gray-800">
                             {user.username}

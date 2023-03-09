@@ -3,13 +3,9 @@ import React from "react";
 import Navigation from "../header/Navigation";
 
 const Landing = () => {
-  
   return (
     <main className="relative h-screen overflow-hidden font-mono bg-white dark:bg-gray-800">
-      <div className="absolute hidden md:block -bottom-32 -left-32 w-96 h-96 text-blue-500">
-        
-       
-      </div>
+      <div className="absolute hidden md:block -bottom-32 -left-32 w-96 h-96 text-blue-500"></div>
       <div className="relative z-20 h-full flex items-center">
         <div className="container relative flex flex-col mb-36 items-center justify-between px-6 py-4 mx-auto">
           <div className="flex flex-col items-center h-full">
