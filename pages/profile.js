@@ -20,12 +20,13 @@ const Profile = () => {
 
   return (
     <div className="flex justify-center mb-10 ">
-      <div className="px-6 py-10 my-20 w-5/12 shadow-md relative rounded-md border">
+      <div className="px-6 py-10 my-20 w-4/12 shadow-md relative rounded-md border">
         <div className="flex flex-wrap justify-center">
           <div className="w-full flex justify-center">
             <div className="relative">
               {profile.image ? (
                 <Image
+                className="rounded-full"
                   width={200}
                   alt="profile"
                   height={200}
@@ -35,6 +36,7 @@ const Profile = () => {
               ) : (
                 <Image
                   alt="profile"
+                  className="rounded-full"
                   width={200}
                   height={200}
                   src="https://placeimg.com/640/480/any"
@@ -42,7 +44,7 @@ const Profile = () => {
               )}
             </div>
           </div>
-          <div className="w-full text-center mt-20">
+          <div className="w-full text-center mt-10">
             <div className="flex justify-center lg:pt-4 pt-8 pb-0">
               {profile.email}{" "}
               <Link
@@ -71,7 +73,7 @@ const Profile = () => {
                 Melbourne-raised, Brooklyn-based Nick Murphy writes, performs
                 and records all of his own music, giving it a warm.
               </p>
-              <Link href="/" className="text-blue-500 underline">Back to home</Link>
+              <Link href="/dashboard" className="text-blue-500 underline">Back to Dashboard</Link>
             </div>
           </div>
         </div>
