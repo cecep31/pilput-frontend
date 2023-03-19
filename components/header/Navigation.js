@@ -36,6 +36,9 @@ export default function Navigation() {
             <Link href="/chat" className="flex px-6 py-2 hover:text-black">
               Chat
             </Link>
+            <Link href="/chat/global" className="flex px-6 py-2 hover:text-black">
+              Global Chat
+            </Link>
             <Link href="/dashboard" className="flex px-6 py-2 hover:text-black">
               Dashbord
             </Link>
