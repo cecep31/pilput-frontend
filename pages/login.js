@@ -72,7 +72,7 @@ export default function Login(props) {
               Sign in
             </h1>
             <p className="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">
-              Lanjut aja login, ngapain baca<br></br>
+              Lanjut aja login, ngapain baca<br/>
             </p>
           </div>
           <div>
