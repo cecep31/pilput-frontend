@@ -1,6 +1,7 @@
 import { getCookie } from "cookies-next";
 import React, { useState, useEffect } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
+import Link from "next/link";
 
 const Global = () => {
   const token = getCookie("token");
@@ -45,6 +46,9 @@ const Global = () => {
 
   return (
     <div className="absolute top-0 bottom-0 right-0 left-0 mx-auto px-10 py-10">
+      <div>
+        <Link href="/">Back to home page</Link>
+      </div>
       <button
         className="p-2 bg-green-300 rounded-lg hover:bg-green-600"
         onClick={handleClickSendMessage}
