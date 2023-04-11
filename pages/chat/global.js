@@ -1,15 +1,20 @@
+import { getCookie } from "cookies-next";
 import React, { useState, useEffect } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
 const Global = () => {
-  //Public API that will echo messages sent to it back to the client
+  const token = getCookie("token");
   const [socketUrl, setSocketUrl] = useState(
     process.env.NEXT_PUBLIC_WS_HOST + "/ws/global"
   );
   const [messageHistory, setMessageHistory] = useState([]);
   const [message, setmessage] = useState("");
 
-  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl, {
+    queryParams: {
+      token: token,
+    },
+  });
 
   useEffect(() => {
     if (lastMessage !== null) {
@@ -20,14 +25,13 @@ const Global = () => {
   }, [lastMessage]);
 
   const handleClickChangeSocketUrl = () => {
-    
     setSocketUrl(process.env.NEXT_PUBLIC_WS_HOST + "/ws/global");
     console.log("reconnect seharusnya");
   };
   async function handleClickSendMessage(event) {
     event.preventDefault();
     await sendMessage(message);
-    setMessageHistory((prev) => prev.concat({ data: message }));
+    // setMessageHistory((prev) => prev.concat({ data: message }));
     setmessage("");
   }
 
@@ -50,7 +54,7 @@ const Global = () => {
       <div className="text-gray-500">{connectionStatus}</div>
       <br></br>
 
-      <div >
+      <div>
         <form className="relative flex" onSubmit={handleClickSendMessage}>
           <input
             value={message}
