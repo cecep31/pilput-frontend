@@ -25,8 +25,8 @@ export async function getServerSideProps({ req, res }) {
 }
 
 export default function Login(props) {
-  const [username, setusername] = useState("");
-  const [password, setpassword] = useState("");
+  const [username, setusername] = useState("guest");
+  const [password, setpassword] = useState("guest");
   const [loginwait, setloginwait] = useState(false);
   const router = useRouter();
 

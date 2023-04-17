@@ -49,7 +49,6 @@ const Global = () => {
   async function handleClickSendMessage(event) {
     event.preventDefault();
     await sendMessage(message);
-    // setMessageHistory((prev) => prev.concat({ data: message }));
     setmessage("");
   }
 
