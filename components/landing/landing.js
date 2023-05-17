@@ -19,7 +19,7 @@ const Landing = () => {
             <div className="flex items-center justify-center mt-4">
               <Link
                 target="_blank"
-                href="https://www.linkedin.com/in/cecep31/"
+                href="https://rxresu.me/cecepjanuardi31/cecep-januardi"
                 className="px-5 py-2 my-2 text-gray-800 uppercase bg-transparent border-2 border-gray-800 rounded-lg dark:text-gray-800 dark:bg-white hover:dark:bg-gray-100 hover:bg-gray-800 hover:text-white text-md"
               >
                 Resume
