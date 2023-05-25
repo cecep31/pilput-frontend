@@ -46,6 +46,7 @@ const Global = () => {
     setSocketUrl(process.env.NEXT_PUBLIC_WS_HOST + "/ws/global");
     console.log("reconnect seharusnya");
   };
+  
   async function handleClickSendMessage(event) {
     event.preventDefault();
     await sendMessage(message);

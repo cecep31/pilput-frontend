@@ -1,4 +1,3 @@
-import { getCookie } from "cookies-next";
 import { useState } from "react";
 import {
   ArrowRightOnRectangleIcon,
@@ -10,22 +9,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { PaperAirplaneIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-
-export async function getServerSideProps({ req, res }) {
-  const token = getCookie("token", { req, res });
-  const apihost = process.env.API_HOST;
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: { apihost, token },
-  };
-}
 
 const Chat = () => {
   const [question, setquestion] = useState("");

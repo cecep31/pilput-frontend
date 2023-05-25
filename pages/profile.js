@@ -1,9 +1,11 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { getData } from "../lib/fetch";
+import { deleteData, getData } from "../lib/fetch";
 import Image from "next/image";
+import {useRouter} from "next/router";
 
 const Profile = () => {
+  const router = useRouter()
   const ASSET_UPLOAD = process.env.NEXT_PUBLIC_STORAGE;
   const [profile, setprofile] = useState({ name: "Loading..." });
 
@@ -14,6 +16,15 @@ const Profile = () => {
     }
   }
 
+  async function deletepicture() {
+    const response = await deleteData("/api/v1/profile/avatar");
+    if (response.status >= 200 && response.status <= 299) {
+      router.push("/profile")
+    }
+  }
+
+  
+
   useEffect(() => {
     getprofile();
   }, []);
@@ -23,7 +34,7 @@ const Profile = () => {
       <div className="px-6 py-10 my-20 w-4/12 shadow-md relative rounded-md border">
         <div className="flex flex-wrap justify-center">
           <div className="w-full flex justify-center">
-            <div className="relative">
+            <div className="relative rounded-full border h-200 w-200">
               {profile.image ? (
                 <Image
                 className="rounded-full"
@@ -42,6 +53,11 @@ const Profile = () => {
                   src="https://placeimg.com/640/480/any"
                 />
               )}
+              <div className="fill-transparent hover:visible absolute top-0 bottom-0 left-0 right-0 ">
+                <div className="flex justify-center h-full items-center opacity-0 hover:opacity-100">
+                  <div className="hover:underline hover:cursor-pointer" onClick={deletepicture}>Delete file</div>
+                </div>
+              </div>
             </div>
           </div>
           <div className="w-full text-center mt-10">
